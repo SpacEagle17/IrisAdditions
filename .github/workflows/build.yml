@@ -1,0 +1,61 @@
+name: Build
+
+on:
+  push:
+    paths:
+      - "src/**"
+      - "buildSrc/**"
+      - "versions/**"
+      - "*.gradle.kts"
+      - "stonecutter.properties.toml"
+      - "gradle.properties"
+      - "version.properties"
+      - "gradle/**"
+      - "gradlew"
+      - "gradlew.bat"
+      - ".github/workflows/build.yml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      # The last one becomes JAVA_HOME: Gradle needs 25, the others compile the older versions
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: |
+            17
+            21
+            25
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Make the Gradle wrapper executable
+        run: chmod +x gradlew
+      - name: Build and test all versions
+        run: ./gradlew buildAll --console=plain
+      - name: Upload the test reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ github.sha }}
+          path: |
+            versions/*/build/reports/tests/
+            versions/*/build/test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Upload the jars
+        uses: actions/upload-artifact@v4
+        with:
+          name: IrisAdditions-${{ github.sha }}
+          path: build/libs/*.jar
+          if-no-files-found: error

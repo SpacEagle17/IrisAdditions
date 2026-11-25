@@ -1,0 +1,37 @@
+mod.id = "iris_additions"
+mod.name = "IrisAdditions"
+mod.group = "com.spaceagle17"
+mod.authors = "SpacEagle17"
+mod.license = "LGPL-3.0"
+mod.description = "Backports newer Iris features and bug fixes to older Minecraft versions, and adds a few features of its own."
+mod.homepage = "https://euphoriapatches.com/discord"
+mod.sources = "https://github.com/SpacEagle17/IrisAdditions"
+mod.issues = "https://euphoriapatches.com/contact"
+
+deps.fabric_loader = "0.20.1"
+loomx.loom_version = "1.19.4"
+
+["1.20.1"]
+deps.java = 17
+# Versions the jar is published for
+mod.mc_releases = ["1.20.1"]
+
+["1.21.1"]
+deps.java = 21
+mod.mc_releases = ["1.21.1"]
+
+["1.21.11"]
+deps.java = 21
+mod.mc_releases = ["1.21.11"]
+
+["26.1.2"]
+deps.java = 25
+mod.mc_releases = ["26.1", "26.1.1", "26.1.2"]
+
+["26.2"]
+deps.java = 25
+mod.mc_releases = ["26.2"]
+
+["26.3"]
+deps.java = 25
+mod.mc_releases = ["26.3"]

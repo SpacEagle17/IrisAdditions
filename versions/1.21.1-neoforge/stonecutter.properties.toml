@@ -1,0 +1,4 @@
+mod.mc_compat = "[1.21.1]"
+deps.neoforge = "21.1.267"
+deps.iris = "KduFYu4t"            # 1.8.14-beta.1
+deps.sodium = "uMOpc5uV"          # 0.8.13

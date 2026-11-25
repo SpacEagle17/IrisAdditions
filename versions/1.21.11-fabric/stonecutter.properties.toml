@@ -1,0 +1,7 @@
+mod.mc_compat = "1.21.11"
+mod.loader_min = "0.17.0"
+mod.publish_quilt = true
+deps.iris = "ka9PDlsN"            # 1.10.8
+deps.sodium = "rkdTcxoT"          # 0.8.14
+deps.fabric_api = "0.141.6+1.21.11"
+deps.glsl_transformer = "3.0.0-pre3"

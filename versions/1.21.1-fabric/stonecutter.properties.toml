@@ -1,0 +1,8 @@
+mod.mc_compat = "1.21.1"
+mod.loader_min = "0.16.0"
+mod.publish_quilt = true
+# runClient crashes here (Fabric Loader dev-only bug), use runProductionClient
+deps.iris = "bAo1Qhte"            # 1.8.14-beta.1
+deps.sodium = "SMxNOGZ6"          # 0.8.13
+deps.fabric_api = "0.116.18+1.21.1"
+deps.glsl_transformer = "3.0.0-pre3"

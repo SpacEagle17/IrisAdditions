@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.spaceagle17.irisadditions.mixin",
+  "plugin": "com.spaceagle17.irisadditions.mixin.IrisAdditionsMixinPlugin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "defineInjection.StandardMacrosMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

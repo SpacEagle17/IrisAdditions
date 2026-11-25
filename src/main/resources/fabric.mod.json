@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "iris_additions",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "${description}",
+  "authors": ["${authors}"],
+  "contact": {
+    "homepage": "${homepage}",
+    "sources": "${sources}",
+    "issues": "${issues}"
+  },
+  "license": "${license}",
+  "environment": "client",
+  "depends": {
+    "fabricloader": ">=${loaderMin}",
+    "minecraft": "${minecraft}",
+    "java": ">=${java}",
+    "iris": "*"
+  },
+  "entrypoints": {
+    "client": ["com.spaceagle17.irisadditions.loader.fabric.FabricEntrypoint"]
+  },
+  "mixins": ["iris_additions.mixins.json"],
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://euphoriapatches.com/discord",
+        "modmenu.donate": "https://euphoriapatches.com/support",
+        "modmenu.patreon": "https://euphoriapatches.com/support"
+      },
+      "update_checker": true
+    }
+  }
+}
