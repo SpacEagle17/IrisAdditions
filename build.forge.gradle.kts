@@ -47,6 +47,7 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
 
     modCompileOnly(modrinth("oculus", "deps.oculus"))
+    compileOnly(modrinth("distanthorizonsapi", "deps.dh_api"))
 
     modRuntimeOnly(modrinth("oculus", "deps.oculus"))
     modRuntimeOnly(modrinth("embeddium", "deps.embeddium"))

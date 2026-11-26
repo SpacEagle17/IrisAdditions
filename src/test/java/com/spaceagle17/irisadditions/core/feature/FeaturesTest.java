@@ -108,6 +108,39 @@ class FeaturesTest {
     }
 
     @Test
+    void dhTexturesNeedANewEnoughDistantHorizons() {
+        String mixin = "features.distantHorizonsTexturesSupport.IrisLodRenderProgramMixin";
+
+        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.7.6+mc1.20.1"));
+        assertFalse(FeatureGroups.allowsMixin(mixin));
+
+        for (String version : List.of("2.4.5-b", "3.2.0-b", "unknown")) {
+            Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.7.6+mc1.20.1")
+                    .withMod(Mods.DISTANT_HORIZONS, version));
+            assertFalse(FeatureGroups.allowsMixin(mixin), version);
+        }
+
+        for (String version : List.of("3.3.0", "3.3.4", "3.3.5-dev", "4.0.0")) {
+            Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.7.6+mc1.20.1")
+                    .withMod(Mods.DISTANT_HORIZONS, version));
+            assertTrue(FeatureGroups.allowsMixin(mixin), version);
+        }
+    }
+
+    @Test
+    void dhTexturesStopAtTheIrisVersionWhichHasThem() {
+        String mixin = "features.distantHorizonsTexturesSupport.DHTerrainTransformerMixin";
+
+        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.11.3+mc26.1")
+                .withMod(Mods.DISTANT_HORIZONS, "3.3.0"));
+        assertTrue(FeatureGroups.allowsMixin(mixin));
+
+        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.11.4+mc26.1")
+                .withMod(Mods.DISTANT_HORIZONS, "3.3.0"));
+        assertFalse(FeatureGroups.allowsMixin(mixin));
+    }
+
+    @Test
     void configToggleDisablesAFeatureButKeepsItsMixins() {
         Mods.setPlatform(new FakePlatform("iris"));
         OWN.setEnabledInConfig(false);

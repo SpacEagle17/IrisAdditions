@@ -11,6 +11,7 @@ import com.spaceagle17.irisadditions.core.log.Log;
 import java.util.OptionalInt;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public final class ShaderDefines {
     private static boolean injectionLogged = false;
@@ -21,7 +22,8 @@ public final class ShaderDefines {
         Log.debug("[ShaderDefines] " + message);
     }
 
-    public static void addDefines(Consumer<String> defineKey, BiConsumer<String, String> defineKeyValue) {
+    public static void addDefines(Consumer<String> defineKey, BiConsumer<String, String> defineKeyValue,
+                                  Predicate<String> isDefinedByIris) {
         try {
             defineKey.accept("IS_IRIS_ADDITIONS");
             debugLog("Adding IS_IRIS_ADDITIONS define");
@@ -38,6 +40,7 @@ public final class ShaderDefines {
             for (FeatureGroup group : FeatureGroups.all()) {
                 for (Feature feature : group.all()) {
                     if (!feature.isEnabled()) continue;
+                    if (!feature.requiredIrisDefine().map(isDefinedByIris::test).orElse(true)) continue;
                     for (String define : feature.shaderDefines()) {
                         defineKey.accept(define);
                         debugLog("Adding " + define + " define");

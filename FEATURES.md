@@ -1,1 +1,2 @@
+- <a name="dh-textures"></a>**Distant Horizons Textures:** Shaders can use block textures on Distant Horizons terrain through `dh_hasTexture()` and `dh_sampleTexture()`, like in newer Iris. Needs Distant Horizons 3.3.0 or newer. Shaders can check for the define [`DISTANT_HORIZONS_TEXTURES`](DEFINES.md). ([Iris commit 5b89e91](https://github.com/IrisShaders/Iris/commit/5b89e916bf228b202e8b8b26df6742149be3b954) by IMS212)
 - **Hide GUI Keybind:** F1 hides and shows the GUI of the shader pack screen, just like its button (Minecraft 1.20.1, newer Iris versions already do this).

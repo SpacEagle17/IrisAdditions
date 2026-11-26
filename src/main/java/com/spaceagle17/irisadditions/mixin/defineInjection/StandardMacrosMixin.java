@@ -31,7 +31,8 @@ public abstract class StandardMacrosMixin {
         List<StringPair> list = (List<StringPair>) defines;
         ShaderDefines.addDefines(
                 key -> define(list, key),
-                (key, value) -> define(list, key, value)
+                (key, value) -> define(list, key, value),
+                key -> list.stream().anyMatch(pair -> pair.key().equals(key))
         );
         return list;
     }

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public final class Feature {
     private final String id;
@@ -16,9 +17,13 @@ public final class Feature {
     private final boolean alsoInEuphoriaPatcher;
     // Mod id to the first version which has this itself
     private final Map<String, String> includedSince = new HashMap<>();
+    // Mod id to the first version this works with, the mod also has to be installed
+    private final Map<String, String> requiredMods = new HashMap<>();
     // Null if every Euphoria Patcher version has it
     private String euphoriaPatcherSince;
     private final List<String> shaderDefines = new ArrayList<>();
+    // Null if the shader defines do not depend on one of Iris
+    private String requiredIrisDefine;
     private volatile boolean enabledInConfig = true;
     private volatile ModLookup modLookup;
 
@@ -33,6 +38,11 @@ public final class Feature {
         return this;
     }
 
+    Feature requiresMod(String modId, String minimumVersion) {
+        requiredMods.put(modId, requireVersion(minimumVersion));
+        return this;
+    }
+
     Feature inEuphoriaPatcherSince(String version) {
         if (!alsoInEuphoriaPatcher) {
             throw new IllegalStateException(id + " is not marked as part of Euphoria Patcher");
@@ -44,6 +54,12 @@ public final class Feature {
     // Shaders get this define while the feature is enabled
     Feature shaderDefine(String name) {
         shaderDefines.add(name);
+        return this;
+    }
+
+    // The shader defines are only added when Iris adds this one
+    Feature definesOnlyWith(String irisDefine) {
+        requiredIrisDefine = irisDefine;
         return this;
     }
 
@@ -67,6 +83,10 @@ public final class Feature {
         return Collections.unmodifiableList(shaderDefines);
     }
 
+    public Optional<String> requiredIrisDefine() {
+        return Optional.ofNullable(requiredIrisDefine);
+    }
+
     public boolean isSuppressedByEuphoria() {
         if (!alsoInEuphoriaPatcher || !Mods.isEuphoriaLoaded()) return false;
         return euphoriaPatcherSince == null || Mods.isModAtLeast(Mods.EUPHORIA_PATCHER, euphoriaPatcherSince);
@@ -76,12 +96,17 @@ public final class Feature {
         return includedSince.entrySet().stream().anyMatch(entry -> Mods.isModAtLeast(entry.getKey(), entry.getValue()));
     }
 
-    // Another installed mod already does this.
+    public boolean isMissingRequirement() {
+        return requiredMods.entrySet().stream().anyMatch(entry -> !Mods.isModAtLeast(entry.getKey(), entry.getValue()));
+    }
+
+    // Another installed mod already does this, or one this needs is missing or too old
     public boolean isSuppressed() {
         Platform platform = Mods.platform();
         ModLookup lookup = modLookup;
         if (lookup == null || lookup.platform() != platform) {
-            lookup = new ModLookup(platform, isSuppressedByEuphoria() || isAlreadyIncluded());
+            lookup = new ModLookup(platform,
+                    isSuppressedByEuphoria() || isAlreadyIncluded() || isMissingRequirement());
             modLookup = lookup;
         }
         return lookup.suppressed();

@@ -7,9 +7,9 @@ import java.util.OptionalInt;
 
 public final class Mods {
     public static final String EUPHORIA_PATCHER = "euphoria_patcher";
-    // On Forge it is Oculus instead, which has version numbers of its own
     public static final String IRIS = "iris";
     public static final String OCULUS = "oculus";
+    public static final String DISTANT_HORIZONS = "distanthorizons";
 
     private static volatile Platform platform;
 

@@ -2,13 +2,15 @@ mod.id = "iris_additions"
 mod.name = "IrisAdditions"
 mod.group = "com.spaceagle17"
 mod.authors = "SpacEagle17"
-mod.license = "LGPL-3.0"
+mod.license = "AGPL-3.0"
 mod.description = "Backports newer Iris features and bug fixes to older Minecraft versions, and adds a few features of its own."
 mod.homepage = "https://euphoriapatches.com/discord"
 mod.sources = "https://github.com/SpacEagle17/IrisAdditions"
 mod.issues = "https://euphoriapatches.com/contact"
 
 deps.fabric_loader = "0.20.1"
+# Distant Horizons API, the oldest one with the block texture atlas
+deps.dh_api = "PzM0NbxE"          # 7.1.0
 loomx.loom_version = "1.19.4"
 
 ["1.20.1"]

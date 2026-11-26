@@ -17,9 +17,10 @@ class ShaderDefinesTest {
         Mods.setPlatform(null);
     }
 
-    private static List<String> addedDefines() {
+    private static List<String> addedDefines(String... irisDefines) {
         List<String> defines = new ArrayList<>();
-        ShaderDefines.addDefines(defines::add, (key, value) -> defines.add(key + "=" + value));
+        ShaderDefines.addDefines(defines::add, (key, value) -> defines.add(key + "=" + value),
+                List.of(irisDefines)::contains);
         return defines;
     }
 
@@ -37,6 +38,16 @@ class ShaderDefinesTest {
     void leavesOutTheDefinesOfAFixIrisAlreadyHas() {
         Mods.setPlatform(new FakePlatform("iris_additions").withMod(Mods.IRIS, "1.11.3+mc26.1"));
 
+        assertEquals(MOD_DEFINES, addedDefines());
+    }
+
+    @Test
+    void addsTheTextureDefineWhenIrisHasDistantHorizonsOn() {
+        Mods.setPlatform(new FakePlatform("iris_additions").withMod(Mods.IRIS, "1.11.3+mc26.1")
+                .withMod(Mods.DISTANT_HORIZONS, "3.3.0"));
+
+        assertEquals(List.of("IS_IRIS_ADDITIONS", "IRIS_ADDITIONS_VERSION=10000", "DISTANT_HORIZONS_TEXTURES"),
+                addedDefines("DISTANT_HORIZONS"));
         assertEquals(MOD_DEFINES, addedDefines());
     }
 

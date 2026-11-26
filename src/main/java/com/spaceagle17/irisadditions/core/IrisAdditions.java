@@ -40,6 +40,8 @@ public final class IrisAdditions {
                     debugLog("'" + group.id() + "." + feature.id() + "' is left to Euphoria Patcher");
                 } else if (feature.isAlreadyIncluded()) {
                     debugLog("'" + group.id() + "." + feature.id() + "' is already part of the installed Iris");
+                } else if (feature.isMissingRequirement()) {
+                    debugLog("'" + group.id() + "." + feature.id() + "' needs a mod which is missing or too old");
                 }
             }
         }

@@ -2,3 +2,4 @@ mod.mc_compat = "[26.3,26.4)"
 deps.neoforge = "26.3.0.118"
 deps.iris = "Ag5S66CF"            # 1.11.7
 deps.sodium = "Sx1xfT5Y"          # 0.9.3-beta.3: 0.9.2 crashes on this NeoForge, beta.4+ refuses this Iris
+deps.glsl_transformer = "3.0.0-pre3"

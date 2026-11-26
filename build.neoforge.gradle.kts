@@ -27,6 +27,9 @@ dependencies {
     fun modrinth(slug: String, property: String) = "maven.modrinth:$slug:${sc.properties[property]}"
 
     compileOnly(modrinth("iris", "deps.iris"))
+    compileOnly(modrinth("distanthorizonsapi", "deps.dh_api"))
+    // Nested in the Iris jar, so it is not on the compile classpath by itself
+    compileOnly("io.github.douira:glsl-transformer:${sc.properties["deps.glsl_transformer"]}")
 
     devMods(modrinth("iris", "deps.iris"))
     devMods(modrinth("sodium", "deps.sodium"))

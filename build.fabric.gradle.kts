@@ -27,6 +27,9 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${sc.properties["deps.fabric_loader"]}")
 
     modCompileOnly(modrinth("iris", "deps.iris"))
+    compileOnly(modrinth("distanthorizonsapi", "deps.dh_api"))
+    // Nested in the Iris jar, so it is not on the compile classpath by itself
+    compileOnly("io.github.douira:glsl-transformer:${sc.properties["deps.glsl_transformer"]}")
 
     // runClient: Iris, Sodium and the libraries Iris bundles
     modRuntimeOnly(modrinth("iris", "deps.iris"))
