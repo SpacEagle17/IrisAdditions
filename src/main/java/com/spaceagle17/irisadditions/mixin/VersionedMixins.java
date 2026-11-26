@@ -9,9 +9,10 @@ public final class VersionedMixins {
 
     public static List<String> list() {
         List<String> mixins = new ArrayList<>();
-        // Use the same condition as on the mixin class:
-        // //? if <1.21.9
-        // mixins.add("features.exampleFeature.OldRendererMixin");
+        // Use the same condition as on the mixin class, and give it @SuppressWarnings({"unused", "UnusedMixin"})
+        //? if <1.20.5 {
+        /*mixins.add("features.hideGUIKeybind.ShaderPackScreenMixin");
+        *///?}
         return mixins;
     }
 }

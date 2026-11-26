@@ -4,9 +4,12 @@ package com.spaceagle17.irisadditions.core.feature;
 public final class Features {
     public static final FeatureGroup GROUP = new FeatureGroup("features");
 
-    // Declare features here:
-    // public static final Feature EXAMPLE = GROUP.register("example", "What it does.",
-    //         /* alsoInEuphoriaPatcher */ true);
+    // Iris has this itself since Minecraft 1.20.5 and never backported it
+    //? if <1.20.5 {
+    /*public static final Feature HIDE_GUI_KEYBIND = GROUP.register("hideGUIKeybind",
+            "Lets F1 hide and show the GUI of the shader pack screen, like its button does.",
+            /^ alsoInEuphoriaPatcher ^/ false);
+    *///?}
 
     private Features() {}
 }

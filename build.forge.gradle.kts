@@ -57,6 +57,11 @@ mixin {
     config(mixinConfig)
 }
 
+// Hides the Mixin processor's progress notes, which Gradle reports as warnings. Its real warnings stay
+tasks.named<JavaCompile>("compileJava") {
+    options.compilerArgs.add("-Aquiet=true")
+}
+
 tasks.jar {
     manifest.attributes("MixinConfigs" to mixinConfig)
 }

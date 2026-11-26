@@ -1,1 +1,1 @@
-- No added features yet.
+- **Hide GUI Keybind:** F1 hides and shows the GUI of the shader pack screen, just like its button (Minecraft 1.20.1, newer Iris versions already do this).
