@@ -9,6 +9,7 @@
     "features.distantHorizonsTexturesSupport.DHGenericTransformerMixin",
     "features.distantHorizonsTexturesSupport.DHTerrainTransformerMixin",
     "features.distantHorizonsTexturesSupport.IrisLodRenderProgramMixin",
+    "features.dropSettingsInSelectionScreen.ShaderPackScreenMixin",
     "fixes.atMidBlockHighCoordinatesFix.ExtendedDataHelperMixin",
     "fixes.hideGUIMenuJumpFix.ShaderPackScreenMixin"
   ],

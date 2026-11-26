@@ -18,6 +18,10 @@ class FeaturesTest {
     private static final Feature OWN = Features.GROUP.register("testOwn", "Only in this mod", false);
     private static final Feature BACKPORT = Features.GROUP.register("testBackport", "In newer Iris", false)
             .includedSince(Mods.IRIS, "1.12.1");
+    private static final Feature SHARED_SINCE = Features.GROUP.register("testSharedSince", "In newer Euphoria Patcher", true)
+            .inEuphoriaPatcherSince("1.10.0");
+    private static final Feature DEPENDENT = Features.GROUP.register("testDependent", "Needs another mod", false)
+            .requiresMod(Mods.DISTANT_HORIZONS, "3.3.0");
 
     @BeforeEach
     void enableAll() {
@@ -77,67 +81,30 @@ class FeaturesTest {
     }
 
     @Test
-    void menuJumpFixStopsAtTheIrisVersionWhichHasIt() {
-        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.11.7+mc26.3"));
-        assertTrue(FeatureGroups.allowsMixin("fixes.hideGUIMenuJumpFix.ShaderPackScreenMixin"));
+    void euphoriaOnlyTakesOverFromTheVersionWhichHasIt() {
+        Mods.setPlatform(new FakePlatform().withMod(Mods.EUPHORIA_PATCHER, "1.9.3-r5.8.1-fabric"));
+        assertTrue(SHARED_SINCE.isEnabled());
 
-        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.12.1+mc26.3"));
-        assertFalse(FeatureGroups.allowsMixin("fixes.hideGUIMenuJumpFix.ShaderPackScreenMixin"));
-    }
-
-    @Test
-    void midBlockFixStopsAtTheIrisVersionWhichHasIt() {
-        String mixin = "fixes.atMidBlockHighCoordinatesFix.ExtendedDataHelperMixin";
-
-        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.11.2+mc26.2"));
-        assertTrue(FeatureGroups.allowsMixin(mixin));
-
-        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.11.3+mc26.1"));
-        assertFalse(FeatureGroups.allowsMixin(mixin));
-    }
-
-    @Test
-    void midBlockFixIsOnlyLeftToEuphoriaVersionsWhichHaveIt() {
-        String mixin = "fixes.atMidBlockHighCoordinatesFix.ExtendedDataHelperMixin";
-
-        Mods.setPlatform(new FakePlatform("iris").withMod(Mods.EUPHORIA_PATCHER, "1.9.3-r5.8.1-fabric"));
-        assertTrue(FeatureGroups.allowsMixin(mixin));
-
-        Mods.setPlatform(new FakePlatform("iris").withMod(Mods.EUPHORIA_PATCHER, "1.10.0-r5.9-fabric"));
-        assertFalse(FeatureGroups.allowsMixin(mixin));
-    }
-
-    @Test
-    void dhTexturesNeedANewEnoughDistantHorizons() {
-        String mixin = "features.distantHorizonsTexturesSupport.IrisLodRenderProgramMixin";
-
-        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.7.6+mc1.20.1"));
-        assertFalse(FeatureGroups.allowsMixin(mixin));
-
-        for (String version : List.of("2.4.5-b", "3.2.0-b", "unknown")) {
-            Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.7.6+mc1.20.1")
-                    .withMod(Mods.DISTANT_HORIZONS, version));
-            assertFalse(FeatureGroups.allowsMixin(mixin), version);
-        }
-
-        for (String version : List.of("3.3.0", "3.3.4", "3.3.5-dev", "4.0.0")) {
-            Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.7.6+mc1.20.1")
-                    .withMod(Mods.DISTANT_HORIZONS, version));
-            assertTrue(FeatureGroups.allowsMixin(mixin), version);
+        for (String version : List.of("1.10.0-r5.9-fabric", "1.11.2-r5.10-forge")) {
+            Mods.setPlatform(new FakePlatform().withMod(Mods.EUPHORIA_PATCHER, version));
+            assertFalse(SHARED_SINCE.isEnabled(), version);
         }
     }
 
     @Test
-    void dhTexturesStopAtTheIrisVersionWhichHasThem() {
-        String mixin = "features.distantHorizonsTexturesSupport.DHTerrainTransformerMixin";
+    void needsTheRequiredModInANewEnoughVersion() {
+        Mods.setPlatform(new FakePlatform());
+        assertFalse(DEPENDENT.isEnabled());
 
-        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.11.3+mc26.1")
-                .withMod(Mods.DISTANT_HORIZONS, "3.3.0"));
-        assertTrue(FeatureGroups.allowsMixin(mixin));
+        for (String version : List.of("3.2.0-b", "unknown")) {
+            Mods.setPlatform(new FakePlatform().withMod(Mods.DISTANT_HORIZONS, version));
+            assertFalse(DEPENDENT.isEnabled(), version);
+        }
 
-        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.11.4+mc26.1")
-                .withMod(Mods.DISTANT_HORIZONS, "3.3.0"));
-        assertFalse(FeatureGroups.allowsMixin(mixin));
+        for (String version : List.of("3.3.0", "3.3.5-dev", "4.0.0")) {
+            Mods.setPlatform(new FakePlatform().withMod(Mods.DISTANT_HORIZONS, version));
+            assertTrue(DEPENDENT.isEnabled(), version);
+        }
     }
 
     @Test

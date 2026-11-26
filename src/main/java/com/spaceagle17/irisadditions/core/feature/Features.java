@@ -17,6 +17,12 @@ public final class Features {
             // The define of newer Iris, so shaders which check it just work
             .shaderDefine("DISTANT_HORIZONS_TEXTURES");
 
+    // borrowed from EP mod lol
+    public static final Feature DROP_SETTINGS_IN_SELECTION_SCREEN = GROUP.register("dropSettingsInSelectionScreen",
+            "Lets you drop a shader settings file onto the shader pack list, to import it into the active shader pack.",
+            true)
+            .inEuphoriaPatcherSince("1.10.0");
+
     // Iris has this itself since Minecraft 1.20.5 and never backported it
     //? if <1.20.5 {
     /*public static final Feature HIDE_GUI_KEYBIND = GROUP.register("hideGUIKeybind",
