@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-// IntelliJ only knows the mixin config files, this one is registered in VersionedMixins
 @SuppressWarnings({"unused", "UnusedMixin"})
 @Mixin(value = ShaderPackScreen.class, remap = false)
 public abstract class ShaderPackScreenMixin extends Screen {
@@ -23,7 +22,6 @@ public abstract class ShaderPackScreenMixin extends Screen {
         super(title);
     }
 
-    // keyPressed and init() come from Minecraft, so unlike the rest they are remapped
     @Inject(method = "keyPressed(III)Z", at = @At("HEAD"), cancellable = true, remap = true)
     private void irisAdditions$toggleGui(int key, int j, int k, CallbackInfoReturnable<Boolean> cir) {
         // Iris only has the show/hide button in a world

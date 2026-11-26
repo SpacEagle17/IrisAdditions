@@ -7,8 +7,7 @@ public final class Features {
     // Iris has this itself since Minecraft 1.20.5 and never backported it
     //? if <1.20.5 {
     /*public static final Feature HIDE_GUI_KEYBIND = GROUP.register("hideGUIKeybind",
-            "Lets F1 hide and show the GUI of the shader pack screen, like its button does.",
-            /^ alsoInEuphoriaPatcher ^/ false);
+            "Lets F1 hide and show the GUI of the shader pack screen, like its button does.", false);
     *///?}
 
     private Features() {}

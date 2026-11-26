@@ -1,1 +1,2 @@
-- **Hide GUI Menu Jumping:** Hiding the GUI after applying changes no longer jumps back to the main settings screen.
+- **Hide GUI Menu Jumping:** Hiding the GUI after applying changes no longer jumps back to the main settings screen. ([Iris PR #3495](https://github.com/IrisShaders/Iris/pull/3495) by SpacEagle17, me yay!)
+- <a name="at-midblock-fix"></a>**at_midBlock at High Coordinates:** The shader attribute `at_midBlock` no longer breaks far away from the world origin. Shaders can check for the define [`IRIS_ADDITIONS_AT_MIDBLOCK_FIX`](DEFINES.md). ([Iris PR #3246](https://github.com/IrisShaders/Iris/pull/3246) by GeForceLegend)

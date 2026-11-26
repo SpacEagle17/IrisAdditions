@@ -18,7 +18,7 @@
 
 ## A mod that brings newer Iris features and bug fixes to older Minecraft versions, and adds some of its own.
 
-## 🔍 Why use this mod?
+## 🧩 Why use this mod?
 Staying on an older Minecraft version usually means staying on an older Iris, without its newer features and bug fixes. IrisAdditions is made to close that gap.
 
 ## Features
@@ -45,30 +45,29 @@ Click the banner or use code **[EUPHORIA](https://www.euphoriapatches.com/ember-
 <a href="https://www.euphoriapatches.com/ember-referral"><img src=https://www.euphoriapatches.com/assets/img/other/ember_host_ep.png></a>
 
 ## For Developers
+
 One source folder builds every version and loader using [Stonecutter](https://stonecutter.kikugie.dev/).
 
+<details>
+<summary>Click to expand for more details</summary>
+
+This is mostly so I can remember XD
+
 ### Building
-- `./gradlew buildAll` (or just `./gradlew`) builds and tests everything. The jars and `IrisAdditionsMod_UNZIP_ME.zip` end up in `build/libs/`
-- `./gradlew ":1.21.1-fabric:build"` builds a single version
-- `./gradlew ":1.21.1-fabric:runClient"` starts the game with Iris, using the folder `run/1.21.1-fabric/`
-- `./gradlew ":1.21.1-fabric:runProductionClient"` (Fabric only) starts the game with the finished jar, like a player would. Use this one on 1.21.1 Fabric, where `runClient` crashes
-
-Gradle needs Java 25, any missing Java version is downloaded automatically.
-
-### Project layout
+```bash
+./gradlew                              # builds and tests everything into build/libs/
+./gradlew ":1.21.11-fabric:build"      # builds a single version
+./gradlew ":1.21.11-fabric:runClient"  # starts the game with Iris
 ```
-src/main/java/.../irisadditions/
-  core/      plain Java, most of the logic goes here. No Minecraft, Iris or loader imports
-  mixin/     mixins which pass values to core/
-  loader/    Fabric, Forge and NeoForge specific code
-stonecutter.properties.toml   mod info, Java and release versions per Minecraft version
-settings.gradle.kts           list of all Minecraft versions and loaders
-build.<loader>.gradle.kts     loader specific build setup
-buildSrc/                     build setup shared by all loaders
-versions/<version>-<loader>/  Iris, loader and library versions of one build, plus its build output
-```
+
+### Layout
+- `core/` plain Java with most of the logic, no Minecraft, Iris or loader imports
+- `mixin/` hooks into Iris
+- `loader/` Fabric, Forge and NeoForge code
+- `versions/` dependencies of each build
 
 ### Version specific code
+Stonecutter switches code per version or loader with comments, so it can look weird:
 ```java
 //? if >=1.21.9 {
 newCall();
@@ -76,19 +75,14 @@ newCall();
 /*oldCall();
 *///?}
 ```
-
-`src/` is committed as `26.3-fabric`. To work on another version, run its `Set active project to ...` task, and run `Reset active project` before committing. Or just install the intellij stonecutter plugin lol, makes it much simpler
+`src/` is committed as `26.3-fabric`, so run `Reset active project` before committing. Or just install the IntelliJ Stonecutter plugin lol, makes it much simpler
 
 ### Adding a feature or fix
-1. Declare it in `core/feature/Features.java` or `core/feature/Fixes.java`, which also creates its config option. If Iris has it itself from some version on, add `.includedSince(Mods.IRIS, "x.y.z")` (`Mods.OCULUS` for Forge), so it is skipped there
-2. Write the logic in `core/` where possible and check `isEnabled()`
-3. Put its mixins in `mixin/features/<id>/` or `mixin/fixes/<id>/`
-4. List mixins for all versions in `iris_additions.mixins.json`, version specific ones in `mixin/VersionedMixins.java`
-
-`Mods.isModLoaded("modid")` and `Mods.isEuphoriaLoaded()` can be used anywhere.
+1. Declare it in `Features.java` or `Fixes.java`, the existing entries show the options
+2. Put its mixins in `mixin/features/<id>/` or `mixin/fixes/<id>/` and list them in `iris_additions.mixins.json` (version specific ones in `VersionedMixins.java`)
+3. Document it in `FEATURES.md` or `BUG_FIXES.md`, and shader defines in `DEFINES.md`
 
 ### Adding a Minecraft version
-1. Add it in `settings.gradle.kts`
-2. Add its Java and release versions to `stonecutter.properties.toml`
-3. Create `versions/<version>-<loader>/stonecutter.properties.toml` with the dependencies, copy a close version as a start
-4. Run `./gradlew buildAll`, the errors and tests show what needs version specific code
+Add it to `settings.gradle.kts` and `stonecutter.properties.toml`, copy a close folder in `versions/`, then run `./gradlew buildAll` to see what breaks
+
+</details>

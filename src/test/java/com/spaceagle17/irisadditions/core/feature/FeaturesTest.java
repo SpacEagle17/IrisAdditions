@@ -86,6 +86,28 @@ class FeaturesTest {
     }
 
     @Test
+    void midBlockFixStopsAtTheIrisVersionWhichHasIt() {
+        String mixin = "fixes.atMidBlockHighCoordinatesFix.ExtendedDataHelperMixin";
+
+        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.11.2+mc26.2"));
+        assertTrue(FeatureGroups.allowsMixin(mixin));
+
+        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.11.3+mc26.1"));
+        assertFalse(FeatureGroups.allowsMixin(mixin));
+    }
+
+    @Test
+    void midBlockFixIsOnlyLeftToEuphoriaVersionsWhichHaveIt() {
+        String mixin = "fixes.atMidBlockHighCoordinatesFix.ExtendedDataHelperMixin";
+
+        Mods.setPlatform(new FakePlatform("iris").withMod(Mods.EUPHORIA_PATCHER, "1.9.3-r5.8.1-fabric"));
+        assertTrue(FeatureGroups.allowsMixin(mixin));
+
+        Mods.setPlatform(new FakePlatform("iris").withMod(Mods.EUPHORIA_PATCHER, "1.10.0-r5.9-fabric"));
+        assertFalse(FeatureGroups.allowsMixin(mixin));
+    }
+
+    @Test
     void configToggleDisablesAFeatureButKeepsItsMixins() {
         Mods.setPlatform(new FakePlatform("iris"));
         OWN.setEnabledInConfig(false);

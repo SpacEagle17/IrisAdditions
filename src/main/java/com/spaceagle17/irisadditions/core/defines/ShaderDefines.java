@@ -3,6 +3,9 @@ package com.spaceagle17.irisadditions.core.defines;
 import com.spaceagle17.irisadditions.core.IrisAdditions;
 import com.spaceagle17.irisadditions.core.Mods;
 import com.spaceagle17.irisadditions.core.Versions;
+import com.spaceagle17.irisadditions.core.feature.Feature;
+import com.spaceagle17.irisadditions.core.feature.FeatureGroup;
+import com.spaceagle17.irisadditions.core.feature.FeatureGroups;
 import com.spaceagle17.irisadditions.core.log.Log;
 
 import java.util.OptionalInt;
@@ -30,6 +33,16 @@ public final class ShaderDefines {
                 debugLog("Adding IRIS_ADDITIONS_VERSION = " + version.getAsInt() + " define");
             } else {
                 debugLog("Not adding IRIS_ADDITIONS_VERSION define - version unknown");
+            }
+
+            for (FeatureGroup group : FeatureGroups.all()) {
+                for (Feature feature : group.all()) {
+                    if (!feature.isEnabled()) continue;
+                    for (String define : feature.shaderDefines()) {
+                        defineKey.accept(define);
+                        debugLog("Adding " + define + " define");
+                    }
+                }
             }
 
             if (!injectionLogged) {

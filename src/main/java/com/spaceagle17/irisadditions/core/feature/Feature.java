@@ -2,8 +2,12 @@ package com.spaceagle17.irisadditions.core.feature;
 
 import com.spaceagle17.irisadditions.core.Mods;
 import com.spaceagle17.irisadditions.core.Versions;
+import com.spaceagle17.irisadditions.core.platform.Platform;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class Feature {
@@ -12,7 +16,11 @@ public final class Feature {
     private final boolean alsoInEuphoriaPatcher;
     // Mod id to the first version which has this itself
     private final Map<String, String> includedSince = new HashMap<>();
+    // Null if every Euphoria Patcher version has it
+    private String euphoriaPatcherSince;
+    private final List<String> shaderDefines = new ArrayList<>();
     private volatile boolean enabledInConfig = true;
+    private volatile ModLookup modLookup;
 
     Feature(String id, String description, boolean alsoInEuphoriaPatcher) {
         this.id = id;
@@ -21,11 +29,29 @@ public final class Feature {
     }
 
     Feature includedSince(String modId, String version) {
+        includedSince.put(modId, requireVersion(version));
+        return this;
+    }
+
+    Feature inEuphoriaPatcherSince(String version) {
+        if (!alsoInEuphoriaPatcher) {
+            throw new IllegalStateException(id + " is not marked as part of Euphoria Patcher");
+        }
+        euphoriaPatcherSince = requireVersion(version);
+        return this;
+    }
+
+    // Shaders get this define while the feature is enabled
+    Feature shaderDefine(String name) {
+        shaderDefines.add(name);
+        return this;
+    }
+
+    private String requireVersion(String version) {
         if (Versions.toNumber(version).isEmpty()) {
             throw new IllegalArgumentException("Not a version for " + id + ": " + version);
         }
-        includedSince.put(modId, version);
-        return this;
+        return version;
     }
 
     // Also the config key and the mixin sub package
@@ -37,17 +63,28 @@ public final class Feature {
         return description;
     }
 
+    public List<String> shaderDefines() {
+        return Collections.unmodifiableList(shaderDefines);
+    }
+
     public boolean isSuppressedByEuphoria() {
-        return alsoInEuphoriaPatcher && Mods.isEuphoriaLoaded();
+        if (!alsoInEuphoriaPatcher || !Mods.isEuphoriaLoaded()) return false;
+        return euphoriaPatcherSince == null || Mods.isModAtLeast(Mods.EUPHORIA_PATCHER, euphoriaPatcherSince);
     }
 
     public boolean isAlreadyIncluded() {
         return includedSince.entrySet().stream().anyMatch(entry -> Mods.isModAtLeast(entry.getKey(), entry.getValue()));
     }
 
-    // Another installed mod already does this
+    // Another installed mod already does this.
     public boolean isSuppressed() {
-        return isSuppressedByEuphoria() || isAlreadyIncluded();
+        Platform platform = Mods.platform();
+        ModLookup lookup = modLookup;
+        if (lookup == null || lookup.platform() != platform) {
+            lookup = new ModLookup(platform, isSuppressedByEuphoria() || isAlreadyIncluded());
+            modLookup = lookup;
+        }
+        return lookup.suppressed();
     }
 
     public boolean isEnabled() {
@@ -57,4 +94,6 @@ public final class Feature {
     public void setEnabledInConfig(boolean enabled) {
         this.enabledInConfig = enabled;
     }
+
+    private record ModLookup(Platform platform, boolean suppressed) {}
 }

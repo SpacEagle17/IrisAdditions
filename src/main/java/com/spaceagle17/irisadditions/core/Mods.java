@@ -37,7 +37,7 @@ public final class Mods {
         return isModLoaded(EUPHORIA_PATCHER);
     }
 
-    private static Platform platform() {
+    public static Platform platform() {
         Platform current = platform;
         if (current == null) {
             throw new IllegalStateException("[IrisAdditions] Mods used before Mods.setPlatform()");
