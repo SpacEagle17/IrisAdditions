@@ -25,6 +25,12 @@ Staying on an older Minecraft version usually means staying on an older Iris, wi
 - **No Setup Needed:** Works out of the box.
 - **Loader Compatibility:** Available for Fabric, Forge, and NeoForge.
 - **Version Support:** Minecraft 1.20.1, 1.21.1, 1.21.11 and 26.1 to 26.3.
+- **Modular:** Every feature and bug fix can be turned off in `config/irisAdditionsSettings.toml`.
+
+All features can be found in the [<ins>features list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/FEATURES.md).
+
+## Bug Fixes
+All bug fixes can be found in the [<ins>bug fix list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/BUG_FIXES.md).
 
 ## Links
 * **Support SpacEagle17 on [<ins>Patreon or Kofi</ins>](https://www.euphoriapatches.com/support/)**
@@ -73,10 +79,10 @@ newCall();
 
 `src/` is committed as `26.3-fabric`. To work on another version, run its `Set active project to ...` task, and run `Reset active project` before committing. Or just install the intellij stonecutter plugin lol, makes it much simpler
 
-### Adding a feature
-1. Declare it in `core/feature/Features.java`, which also creates its config option.
-2. Write the logic in `core/` and check `feature.isEnabled()`
-3. Put its mixins in `mixin/<featureId>/`
+### Adding a feature or fix
+1. Declare it in `core/feature/Features.java` or `core/feature/Fixes.java`, which also creates its config option. If Iris has it itself from some version on, add `.includedSince(Mods.IRIS, "x.y.z")` (`Mods.OCULUS` for Forge), so it is skipped there
+2. Write the logic in `core/` where possible and check `isEnabled()`
+3. Put its mixins in `mixin/features/<id>/` or `mixin/fixes/<id>/`
 4. List mixins for all versions in `iris_additions.mixins.json`, version specific ones in `mixin/VersionedMixins.java`
 
 `Mods.isModLoaded("modid")` and `Mods.isEuphoriaLoaded()` can be used anywhere.

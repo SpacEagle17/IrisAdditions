@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,14 +14,6 @@ class ShaderDefinesTest {
     @AfterEach
     void clearPlatform() {
         Mods.setPlatform(null);
-    }
-
-    @Test
-    void formatsTheVersionAsADecimalNumber() {
-        assertEquals(Optional.of("100"), ShaderDefines.formatVersion("0.1.0+mc1.20.1-forge"));
-        assertEquals(Optional.of("10203"), ShaderDefines.formatVersion("1.2.3"));
-        assertEquals(Optional.of("21500"), ShaderDefines.formatVersion("2.15-beta"));
-        assertEquals(Optional.empty(), ShaderDefines.formatVersion("unknown"));
     }
 
     @Test

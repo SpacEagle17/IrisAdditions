@@ -1,0 +1,1 @@
+- **Hide GUI Menu Jumping:** Hiding the GUI after applying changes no longer jumps back to the main settings screen.

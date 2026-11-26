@@ -1,7 +1,7 @@
 package com.spaceagle17.irisadditions.mixin;
 
 import com.spaceagle17.irisadditions.core.Mods;
-import com.spaceagle17.irisadditions.core.feature.Features;
+import com.spaceagle17.irisadditions.core.feature.FeatureGroups;
 import com.spaceagle17.irisadditions.core.log.Log;
 import com.spaceagle17.irisadditions.loader.LoaderPlatforms;
 import org.objectweb.asm.tree.ClassNode;
@@ -30,7 +30,7 @@ public final class IrisAdditionsMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return irisPresent && Features.allowsMixin(mixinClassName.substring(mixinPackage.length() + 1));
+        return irisPresent && FeatureGroups.allowsMixin(mixinClassName.substring(mixinPackage.length() + 1));
     }
 
     @Override

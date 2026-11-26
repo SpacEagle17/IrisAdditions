@@ -6,14 +6,18 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FeaturesTest {
-    // The registry is global
-    private static final Feature SHARED = Features.register("testShared", "Also in Euphoria Patcher", true, true);
-    private static final Feature OWN = Features.register("testOwn", "Only in this mod", true, false);
+    // The groups are global
+    private static final Feature SHARED = Features.GROUP.register("testShared", "Also in Euphoria Patcher", true);
+    private static final Feature OWN = Features.GROUP.register("testOwn", "Only in this mod", false);
+    private static final Feature BACKPORT = Features.GROUP.register("testBackport", "In newer Iris", false)
+            .includedSince(Mods.IRIS, "1.12.1");
 
     @BeforeEach
     void enableAll() {
@@ -32,7 +36,7 @@ class FeaturesTest {
 
         assertTrue(SHARED.isEnabled());
         assertTrue(OWN.isEnabled());
-        assertTrue(Features.allowsMixin("testShared.SomeMixin"));
+        assertTrue(FeatureGroups.allowsMixin("features.testShared.SomeMixin"));
     }
 
     @Test
@@ -41,8 +45,44 @@ class FeaturesTest {
 
         assertFalse(SHARED.isEnabled());
         assertTrue(OWN.isEnabled());
-        assertFalse(Features.allowsMixin("testShared.SomeMixin"));
-        assertTrue(Features.allowsMixin("testOwn.SomeMixin"));
+        assertFalse(FeatureGroups.allowsMixin("features.testShared.SomeMixin"));
+        assertTrue(FeatureGroups.allowsMixin("features.testOwn.SomeMixin"));
+    }
+
+    @Test
+    void runsOnVersionsWhichDoNotHaveItYet() {
+        for (String version : List.of("1.7.6+mc1.20.1", "1.11.7+mc26.3", "1.12.0+mc26.3", "unknown")) {
+            Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, version));
+
+            assertTrue(BACKPORT.isEnabled(), version);
+            assertTrue(FeatureGroups.allowsMixin("features.testBackport.SomeMixin"), version);
+        }
+    }
+
+    @Test
+    void skipsWhatTheInstalledIrisAlreadyHas() {
+        for (String version : List.of("1.12.1+mc26.3", "1.12.1-snapshot+mc26.3-local", "1.13+mc26.4", "2.0.0")) {
+            Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, version));
+
+            assertFalse(BACKPORT.isEnabled(), version);
+            assertFalse(FeatureGroups.allowsMixin("features.testBackport.SomeMixin"), version);
+        }
+    }
+
+    @Test
+    void irisVersionsDoNotApplyToOculus() {
+        Mods.setPlatform(new FakePlatform().withMod(Mods.OCULUS, "1.13.0"));
+
+        assertTrue(BACKPORT.isEnabled());
+    }
+
+    @Test
+    void menuJumpFixStopsAtTheIrisVersionWhichHasIt() {
+        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.11.7+mc26.3"));
+        assertTrue(FeatureGroups.allowsMixin("fixes.hideGUIMenuJumpFix.ShaderPackScreenMixin"));
+
+        Mods.setPlatform(new FakePlatform().withMod(Mods.IRIS, "1.12.1+mc26.3"));
+        assertFalse(FeatureGroups.allowsMixin("fixes.hideGUIMenuJumpFix.ShaderPackScreenMixin"));
     }
 
     @Test
@@ -51,20 +91,22 @@ class FeaturesTest {
         OWN.setEnabledInConfig(false);
 
         assertFalse(OWN.isEnabled());
-        assertTrue(Features.allowsMixin("testOwn.SomeMixin"));
+        assertTrue(FeatureGroups.allowsMixin("features.testOwn.SomeMixin"));
     }
 
     @Test
     void mixinsOutsideAFeaturePackageAreAlwaysAllowed() {
         Mods.setPlatform(new FakePlatform("euphoria_patcher"));
 
-        assertTrue(Features.allowsMixin("ShaderPackScreenMixin"));
-        assertTrue(Features.allowsMixin("notAFeature.SomeMixin"));
+        assertTrue(FeatureGroups.allowsMixin("ShaderPackScreenMixin"));
+        assertTrue(FeatureGroups.allowsMixin("defineInjection.SomeMixin"));
+        assertTrue(FeatureGroups.allowsMixin("features.notAFeature.SomeMixin"));
+        assertTrue(FeatureGroups.allowsMixin("fixes.testShared.SomeMixin"));
     }
 
     @Test
     void rejectsDuplicateAndUnusableIds() {
-        assertThrows(IllegalStateException.class, () -> Features.register("testOwn", "Again", true, false));
-        assertThrows(IllegalArgumentException.class, () -> Features.register("Bad.Id", "Bad", true, false));
+        assertThrows(IllegalStateException.class, () -> Features.GROUP.register("testOwn", "Again", false));
+        assertThrows(IllegalArgumentException.class, () -> Features.GROUP.register("Bad.Id", "Bad", false));
     }
 }

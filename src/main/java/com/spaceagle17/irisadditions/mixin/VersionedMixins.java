@@ -11,7 +11,7 @@ public final class VersionedMixins {
         List<String> mixins = new ArrayList<>();
         // Use the same condition as on the mixin class:
         // //? if <1.21.9
-        // mixins.add("exampleFeature.OldRendererMixin");
+        // mixins.add("features.exampleFeature.OldRendererMixin");
         return mixins;
     }
 }

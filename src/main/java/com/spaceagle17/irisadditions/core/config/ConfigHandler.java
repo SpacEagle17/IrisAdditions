@@ -1,7 +1,8 @@
 package com.spaceagle17.irisadditions.core.config;
 
 import com.spaceagle17.irisadditions.core.feature.Feature;
-import com.spaceagle17.irisadditions.core.feature.Features;
+import com.spaceagle17.irisadditions.core.feature.FeatureGroup;
+import com.spaceagle17.irisadditions.core.feature.FeatureGroups;
 import com.spaceagle17.irisadditions.core.log.Log;
 
 import java.nio.file.Path;
@@ -20,14 +21,16 @@ public final class ConfigHandler {
     }
 
     static void configStuff() {
-        Config.setConfigCategoryOrder("features", "debug");
+        Config.setConfigCategoryOrder("features", "fixes", "debug");
 
         // readWriteConfig(category, key, default, description), the type comes from the default value.
         // Optional: allowedValues for strings, TypeMigration.map(old, new) if an option changes its type
 
-        for (Feature feature : Features.all()) {
-            feature.setEnabledInConfig(Config.readWriteConfig("features", feature.id(), feature.enabledByDefault(),
-                    feature.description()));
+        for (FeatureGroup group : FeatureGroups.all()) {
+            for (Feature feature : group.all()) {
+                feature.setEnabledInConfig(Config.readWriteConfig(group.id(), feature.id(), true,
+                        feature.description() + "\nDefault = true"));
+            }
         }
 
         boolean configDebugLogging = Config.readWriteConfig("debug", "doDebugLogging", false,

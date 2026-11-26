@@ -3,7 +3,8 @@ package com.spaceagle17.irisadditions.core;
 import com.spaceagle17.irisadditions.core.config.Config;
 import com.spaceagle17.irisadditions.core.config.ConfigHandler;
 import com.spaceagle17.irisadditions.core.feature.Feature;
-import com.spaceagle17.irisadditions.core.feature.Features;
+import com.spaceagle17.irisadditions.core.feature.FeatureGroup;
+import com.spaceagle17.irisadditions.core.feature.FeatureGroups;
 import com.spaceagle17.irisadditions.core.log.Log;
 import com.spaceagle17.irisadditions.core.platform.Platform;
 
@@ -33,9 +34,13 @@ public final class IrisAdditions {
         ConfigHandler.load(platform.configDirectory().resolve(CONFIG_FILE_NAME), version);
         Runtime.getRuntime().addShutdownHook(new Thread(Config::stopConfigWatcher));
 
-        for (Feature feature : Features.all()) {
-            if (feature.isSuppressedByEuphoria()) {
-                debugLog("Feature '" + feature.id() + "' is left to Euphoria Patcher");
+        for (FeatureGroup group : FeatureGroups.all()) {
+            for (Feature feature : group.all()) {
+                if (feature.isSuppressedByEuphoria()) {
+                    debugLog("'" + group.id() + "." + feature.id() + "' is left to Euphoria Patcher");
+                } else if (feature.isAlreadyIncluded()) {
+                    debugLog("'" + group.id() + "." + feature.id() + "' is already part of the installed Iris");
+                }
             }
         }
         Log.info("IrisAdditions v" + version + " initialized successfully on " + platform.loader() + ".");

@@ -1,5 +1,9 @@
 package com.spaceagle17.irisadditions.core.config;
 
+import com.spaceagle17.irisadditions.core.FakePlatform;
+import com.spaceagle17.irisadditions.core.Mods;
+import com.spaceagle17.irisadditions.core.feature.Feature;
+import com.spaceagle17.irisadditions.core.feature.Fixes;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -149,6 +153,23 @@ class ConfigTest {
 
         assertEquals(1, changes.get());
         assertEquals(9, Config.readWriteConfig("a", "count", 1, "d"));
+    }
+
+    @Test
+    void handlerGivesEveryFixItsOwnSetting() throws IOException {
+        Mods.setPlatform(new FakePlatform("iris"));
+        write("[fixes]", "\thideGUIMenuJumpFix = false");
+        restart();
+        ConfigHandler.configStuff();
+
+        assertFalse(Fixes.HIDE_GUI_MENU_JUMP.isEnabled());
+        String text = Files.readString(file);
+        assertTrue(text.contains("[fixes]"));
+        for (Feature fix : Fixes.GROUP.all()) {
+            assertTrue(text.contains("\t" + fix.id() + " = "));
+        }
+        Fixes.HIDE_GUI_MENU_JUMP.setEnabledInConfig(true);
+        Mods.setPlatform(null);
     }
 
     @Test

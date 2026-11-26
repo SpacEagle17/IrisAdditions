@@ -5,7 +5,8 @@
   "plugin": "com.spaceagle17.irisadditions.mixin.IrisAdditionsMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "defineInjection.StandardMacrosMixin"
+    "defineInjection.StandardMacrosMixin",
+    "fixes.hideGUIMenuJumpFix.ShaderPackScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 0

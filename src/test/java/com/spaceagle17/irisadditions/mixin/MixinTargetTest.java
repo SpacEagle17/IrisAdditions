@@ -2,6 +2,8 @@ package com.spaceagle17.irisadditions.mixin;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.spaceagle17.irisadditions.core.feature.FeatureGroup;
+import com.spaceagle17.irisadditions.core.feature.FeatureGroups;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -104,6 +106,18 @@ class MixinTargetTest {
         assertTrue(compiled.containsAll(registered),
                 "Registered mixins without a class on this version: "
                         + registered.stream().filter(name -> !compiled.contains(name)).toList());
+    }
+
+    @Test
+    void everyFeatureMixinBelongsToADeclaredFeature() {
+        for (String name : registeredMixins()) {
+            String[] parts = name.split("\\.");
+            for (FeatureGroup group : FeatureGroups.all()) {
+                if (!parts[0].equals(group.id())) continue;
+                assertTrue(parts.length > 2 && group.byId(parts[1]).isPresent(),
+                        name + " is not in the folder of a declared entry of " + group.id());
+            }
+        }
     }
 
     @Test
