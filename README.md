@@ -1,16 +1,16 @@
-# IrisAdditions
+# <img src="https://cdn.modrinth.com/data/cached_images/35ed978665cb0469e0aa20d0c6667011358ad205.png" alt="IrisAdditions_logo" width="60" height="auto" /> &nbsp; IrisAdditions
 
 <center>
 <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; text-align: center;">
     <a href="https://www.euphoriapatches.com/discord/" target="_blank">
-        <img alt="Discord" src="https://img.shields.io/badge/Discord-050d18?style=for-the-badge&logo=discord&logoColor=black&labelColor=e5f7ff">
+        <img alt="Discord" src="https://img.shields.io/badge/Discord-050d18?style=for-the-badge&logo=discord&logoColor=black&labelColor=f6f6b3">
     </a>
     <a href="https://github.com/SpacEagle17/IrisAdditions" target="_blank">
-        <img alt="Source" src="https://img.shields.io/badge/Source-050d18?style=for-the-badge&logo=github&logoColor=black&labelColor=e5f7ff">
+        <img alt="Source" src="https://img.shields.io/badge/Source-050d18?style=for-the-badge&logo=github&logoColor=black&labelColor=f6f6b3">
     </a>
-        <img alt="Iris Additions" src="https://img.shields.io/badge/Iris%20%7C%20Oculus-050d18?style=for-the-badge&logoColor=black&label=WORKS%20ON%3A&labelColor=050d18&color=e5f7ff">
+        <img alt="Iris Additions" src="https://img.shields.io/badge/Iris%20%7C%20Oculus%20%7C%20and%20derivatives-050d18?style=for-the-badge&logoColor=black&label=WORKS%20ON%3A&labelColor=050d18&color=f6f6b3">
     <a href="https://www.euphoriapatches.com/support/" target="_blank">
-        <img alt="Support" src="https://img.shields.io/badge/Spaceagle17-050d18?style=for-the-badge&logo=patreon&logoColor=black&label=Support&labelColor=e5f7ff">
+        <img alt="Support" src="https://img.shields.io/badge/Spaceagle17-050d18?style=for-the-badge&logo=patreon&logoColor=black&label=Support&labelColor=f6f6b3">
     </a>
 </div>
 <br>
