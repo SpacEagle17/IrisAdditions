@@ -11,6 +11,7 @@
     "issues": "${issues}"
   },
   "license": "${license}",
+  "icon": "logo.png",
   "environment": "client",
   "depends": {
     "fabricloader": ">=${loaderMin}",

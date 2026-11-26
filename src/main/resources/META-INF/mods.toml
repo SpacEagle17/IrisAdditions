@@ -8,6 +8,7 @@ modId="iris_additions"
 version="${version}"
 displayName="${name}"
 displayURL="${sources}"
+logoFile="logo.png"
 authors="${authors}"
 description='''${description}'''
 displayTest="IGNORE_ALL_VERSION"
