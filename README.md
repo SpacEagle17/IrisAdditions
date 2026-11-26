@@ -30,7 +30,7 @@ Staying on an older Minecraft version usually means staying on an older Iris, wi
 All features can be found in the [<ins>features list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/FEATURES.md).
 
 ## Bug Fixes
-All bug fixes can be found in the [<ins>bug fix list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/BUG_FIXES.md).
+All bug fixes can be found in the [<ins>bug fix list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/FIXES.md).
 
 ## For Shader Devs
 All shader defines can be found in the [<ins>define list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/DEFINES.md).
@@ -83,7 +83,7 @@ newCall();
 ### Adding a feature or fix
 1. Declare it in `Features.java` or `Fixes.java`, the existing entries show the options
 2. Put its mixins in `mixin/features/<id>/` or `mixin/fixes/<id>/` and list them in `iris_additions.mixins.json` (version specific ones in `VersionedMixins.java`)
-3. Document it in `FEATURES.md` or `BUG_FIXES.md`, and shader defines in `DEFINES.md`
+3. Document it in `FEATURES.md` or `FIXES.md`, and shader defines in `DEFINES.md`
 
 ### Adding a Minecraft version
 Add it to `settings.gradle.kts` and `stonecutter.properties.toml`, copy a close folder in `versions/`, then run `./gradlew buildAll` to see what breaks

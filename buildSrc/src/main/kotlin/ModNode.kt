@@ -54,6 +54,7 @@ fun Project.configureModNode(node: ModNode, modJar: Provider<RegularFile>, mixin
     tasks.withType<Jar>().configureEach {
         val licenseName = "LICENSE_${node.modName}.txt"
         from(rootProject.file("LICENSE")) { rename { licenseName } }
+        from(rootProject.file("3rd_party_licenses")) { into("3rd_party_licenses") }
     }
 
     tasks.register<Copy>("collectJar") {

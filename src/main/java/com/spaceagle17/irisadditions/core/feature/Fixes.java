@@ -22,5 +22,16 @@ public final class Fixes {
             // Complementary already checks this one. Left out of the docs on purpose, shaders should use ours
             .shaderDefine("EUPHORIA_PATCHES_AT_MIDBLOCK_FIX");
 
+    // https://github.com/IrisShaders/Iris/commit/17f4ba6ca7f637b6313f56fb3c42b21aae13bf38
+    public static final Feature SELECTED_PACK_CENTERED = GROUP.register("selectedPackCenteredFix",
+            "Shows the selected shader pack in the middle of the shader pack list when opening it.",
+            false)
+            // Iris on 1.21.1 fixed in in 1.8.14
+            //? if <1.21.11 {
+            /*.includedSince(Mods.IRIS, "1.8.14");
+            *///?} else {
+            .includedSince(Mods.IRIS, "1.11.2");
+            //?}
+
     private Fixes() {}
 }

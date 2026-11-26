@@ -11,7 +11,8 @@
     "features.distantHorizonsTexturesSupport.IrisLodRenderProgramMixin",
     "features.dropSettingsInSelectionScreen.ShaderPackScreenMixin",
     "fixes.atMidBlockHighCoordinatesFix.ExtendedDataHelperMixin",
-    "fixes.hideGUIMenuJumpFix.ShaderPackScreenMixin"
+    "fixes.hideGUIMenuJumpFix.ShaderPackScreenMixin",
+    "fixes.selectedPackCenteredFix.ShaderPackSelectionListMixin"
   ],
   "injectors": {
     "defaultRequire": 0
