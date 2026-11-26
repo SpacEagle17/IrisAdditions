@@ -32,6 +32,9 @@ All features can be found in the [<ins>features list</ins>](https://github.com/S
 ## Bug Fixes
 All bug fixes can be found in the [<ins>bug fix list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/BUG_FIXES.md).
 
+## For Shader Devs
+All shader defines can be found in the [<ins>define list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/DEFINES.md).
+
 ## Links
 * **Support SpacEagle17 on [<ins>Patreon or Kofi</ins>](https://www.euphoriapatches.com/support/)**
 * **Contact:** **https://euphoriapatches.com/contact**
