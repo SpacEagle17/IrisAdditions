@@ -25,6 +25,8 @@ dependencies {
     minecraft("com.mojang:minecraft:${sc.current.version}")
     loomx.applyMojangMappings() // no-op on unobfuscated versions (26.1+)
     modImplementation("net.fabricmc:fabric-loader:${sc.properties["deps.fabric_loader"]}")
+    // Only into the jar, development already gets it with the loader
+    include("io.github.llamalad7:mixinextras-fabric:${sc.properties["deps.mixin_extras"]}")
 
     modCompileOnly(modrinth("iris", "deps.iris"))
     compileOnly(modrinth("distanthorizonsapi", "deps.dh_api"))

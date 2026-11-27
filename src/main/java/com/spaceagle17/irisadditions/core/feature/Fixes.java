@@ -39,5 +39,21 @@ public final class Fixes {
             "Stops the hide GUI button from fading away in the shader settings screen.", false);
     *///?}
 
+    // https://github.com/IrisShaders/Iris/pull/2941
+    // Only wrong since Minecraft 1.21.5, and every Iris release for 26.1 and newer has the fix
+    //? if >=1.21.5 <=1.21.11 {
+    /*public static final Feature HORIZON_PERFORMANCE = GROUP.register("horizonPerformanceFix",
+            "Fixes a big FPS loss from drawing the sky with shaders. Changing this needs the shaders to be reloaded.",
+            false)
+            // Each Minecraft version got the fix in another Iris version
+            //? if <1.21.6 {
+            /^.includedSince(Mods.IRIS, "1.8.12");
+            ^///?} else if <1.21.11 {
+            /^.includedSince(Mods.IRIS, "1.9.7");
+            ^///?} else {
+            .includedSince(Mods.IRIS, "1.10.3");
+            //?}
+    *///?}
+
     private Fixes() {}
 }

@@ -46,6 +46,12 @@ dependencies {
 
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
 
+    // Forge does not ship MixinExtras
+    val mixinExtras = "${sc.properties["deps.mixin_extras"]}"
+    compileOnly("io.github.llamalad7:mixinextras-common:$mixinExtras")
+    annotationProcessor("io.github.llamalad7:mixinextras-common:$mixinExtras")
+    jarJar(implementation("io.github.llamalad7:mixinextras-forge:$mixinExtras")!!)
+
     modCompileOnly(modrinth("oculus", "deps.oculus"))
     compileOnly(modrinth("distanthorizonsapi", "deps.dh_api"))
 

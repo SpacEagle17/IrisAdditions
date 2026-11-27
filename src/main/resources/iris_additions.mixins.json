@@ -16,5 +16,8 @@
   ],
   "injectors": {
     "defaultRequire": 0
+  },
+  "mixinextras": {
+    "minVersion": "0.5.0"
   }
 }

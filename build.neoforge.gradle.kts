@@ -33,6 +33,9 @@ dependencies {
 
     devMods(modrinth("iris", "deps.iris"))
     devMods(modrinth("sodium", "deps.sodium"))
+
+    // Only into the jar, development already gets it with NeoForge
+    jarJar("io.github.llamalad7:mixinextras-neoforge:${sc.properties["deps.mixin_extras"]}")
 }
 
 val prepareDevClient = tasks.register<Sync>("prepareDevClient") {

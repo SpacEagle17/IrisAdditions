@@ -29,5 +29,14 @@ public final class Features {
             "Lets F1 hide and show the GUI of the shader pack screen, like its button does.", false);
     *///?}
 
+    // https://github.com/IrisShaders/Iris/commit/67e291c518cd3bd7b6393bb9a00c60c8f64d6e42
+    // Every Iris release for 26.1 and newer has it
+    //? if <=1.21.11 {
+    /*public static final Feature SHORTER_HOVER_TIME = GROUP.register("shorterHoverTime",
+            "Shows the description of a shader setting after hovering over it for half as long.", false)
+            // Only Iris for 1.21.11 got this, older Minecraft versions have lower Iris versions
+            .includedSince(Mods.IRIS, "1.10.6");
+    *///?}
+
     private Features() {}
 }

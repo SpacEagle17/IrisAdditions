@@ -1,3 +1,4 @@
+- **Sky Performance:** Fixes a big FPS loss caused by how the sky horizon is drawn with shaders. (Minecraft 1.21.5-1.21.11) ([Iris PR #2941](https://github.com/IrisShaders/Iris/pull/2941) by LovelyCane)
 - **Hide GUI Menu Jumping:** Hiding the GUI after applying changes no longer jumps back to the main settings screen. ([Iris PR #3495](https://github.com/IrisShaders/Iris/pull/3495) by SpacEagle17, me yay!)
 - **Hide GUI Button Fading Away:** The button which hides the GUI no longer disappears in the shader settings screen. (Minecraft 1.21.2-1.21.5)
 - **Centred Selected ShaderPack:** Opening the shaderpack selection list now shows the selected shaderpack in the middle of the screen, instead of scrolling away from it. ([Iris PR #3106](https://github.com/IrisShaders/Iris/pull/3106) by GeForceLegend)

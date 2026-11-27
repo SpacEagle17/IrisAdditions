@@ -9,6 +9,8 @@ mod.sources = "https://github.com/SpacEagle17/IrisAdditions"
 mod.issues = "https://euphoriapatches.com/contact"
 
 deps.fabric_loader = "0.20.1"
+# In every jar, as older loaders ship older versions
+deps.mixin_extras = "0.5.5"
 # Distant Horizons API, the oldest one with the block texture atlas
 deps.dh_api = "PzM0NbxE"          # 7.1.0
 loomx.loom_version = "1.19.4"
