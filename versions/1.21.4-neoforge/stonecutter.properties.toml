@@ -1,0 +1,5 @@
+mod.mc_compat = "[1.21.4]"
+deps.neoforge = "21.4.161"
+deps.iris = "FNc0XYTL"            # 1.8.8
+deps.sodium = "GUEd3mz0"          # 0.6.9
+deps.glsl_transformer = "2.0.1"

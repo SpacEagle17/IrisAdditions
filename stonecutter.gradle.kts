@@ -50,6 +50,13 @@ tasks.register("buildAll") {
 // Running just "./gradlew" builds everything
 defaultTasks("buildAll")
 
+// Not part of any build, it needs the network. Each version adds itself in configureModNode
+tasks.register<CheckIrisUpdates>("checkIrisUpdates") {
+    group = "verification"
+    description = "Fails if Modrinth has newer Iris or Oculus builds than the ones used here"
+    report.set(layout.buildDirectory.file("reports/irisUpdates.md"))
+}
+
 val publishSession = PublishSession.of(project)
 val changelogFile = file("CHANGELOG.md")
 val modVersion = baseModVersion()

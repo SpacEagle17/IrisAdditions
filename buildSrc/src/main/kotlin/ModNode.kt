@@ -66,6 +66,12 @@ fun Project.configureModNode(node: ModNode, modJar: Provider<RegularFile>, mixin
     }
 
     configurePublishing(node, modVersion, modJar)
+
+    val build = name
+    val shaderMod = if (node.loader == "forge") "oculus" else "iris"
+    rootProject.tasks.named<CheckIrisUpdates>("checkIrisUpdates") {
+        pins.add(ShaderModPin(build, node.loader, ArrayList(node.minecraftReleases), shaderMod, node.property("deps.$shaderMod")))
+    }
 }
 
 private fun Project.configureJava(node: ModNode) {

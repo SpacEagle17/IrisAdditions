@@ -24,7 +24,7 @@ Staying on an older Minecraft version usually means staying on an older Iris, wi
 ## Features
 - **No Setup Needed:** Works out of the box.
 - **Loader Compatibility:** Available for Fabric, Forge, and NeoForge.
-- **Version Support:** Minecraft 1.20.1, 1.21.1, 1.21.11 and 26.1 to 26.3.
+- **Version Support:** Minecraft 1.20.1, 1.21 until latest
 - **Modular:** Every feature and bug fix can be turned off in `config/irisAdditionsSettings.toml`.
 
 All features can be found in the [<ins>features list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/FEATURES.md).
@@ -61,6 +61,7 @@ This is mostly so I can remember XD
 ./gradlew                              # builds and tests everything into build/libs/
 ./gradlew ":1.21.11-fabric:build"      # builds a single version
 ./gradlew ":1.21.11-fabric:runClient"  # starts the game with Iris
+./gradlew checkIrisUpdates             # fails if there are newer Iris or Oculus dependencies
 ```
 
 ### Layout

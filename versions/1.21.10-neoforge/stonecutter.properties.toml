@@ -1,0 +1,7 @@
+mod.mc_compat = "[1.21.10]"
+# Iris has no NeoForge build for 1.21.9
+mod.mc_releases = ["1.21.10"]
+deps.neoforge = "21.10.64"
+deps.iris = "aBn2niiX"            # 1.9.7
+deps.sodium = "PdQpfqPZ"          # 0.7.3
+deps.glsl_transformer = "3.0.0-pre3"

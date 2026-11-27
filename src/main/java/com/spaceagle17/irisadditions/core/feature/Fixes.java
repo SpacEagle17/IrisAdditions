@@ -26,8 +26,8 @@ public final class Fixes {
     public static final Feature SELECTED_PACK_CENTERED = GROUP.register("selectedPackCenteredFix",
             "Shows the selected shader pack in the middle of the shader pack list when opening it.",
             false)
-            // Iris on 1.21.1 fixed in in 1.8.14
-            //? if <1.21.11 {
+            // Iris on 1.21.1 fixed it in 1.8.14
+            //? if <1.21.2 {
             /*.includedSince(Mods.IRIS, "1.8.14");
             *///?} else {
             .includedSince(Mods.IRIS, "1.11.2");

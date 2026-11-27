@@ -1,0 +1,5 @@
+mod.mc_compat = "[1.21.6,1.21.8]"
+deps.neoforge = "21.8.57"
+deps.iris = "T06etL58"            # 1.9.6
+deps.sodium = "lgWRGiHv"          # 0.7.2
+deps.glsl_transformer = "3.0.0-pre3"

@@ -1,0 +1,5 @@
+mod.mc_compat = "[1.21.5]"
+deps.neoforge = "21.5.101"
+deps.iris = "KAopiPos"            # 1.8.11
+deps.sodium = "FbKAFCUM"          # 0.6.12
+deps.glsl_transformer = "2.0.1"

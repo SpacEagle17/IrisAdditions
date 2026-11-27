@@ -38,7 +38,7 @@ internal fun Project.configurePublishing(node: ModNode, modVersion: String, modJ
             .orElse("No changelog."))
         type.set(ReleaseType.STABLE)
         modLoaders.add(node.loader)
-        if (node.loader == "fabric" && node.property("mod.publish_quilt").toBoolean()) modLoaders.add("quilt")
+        if (node.loader == "fabric") modLoaders.add("quilt")
         dryRun.set(!live)
 
         curseforge {

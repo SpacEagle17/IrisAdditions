@@ -1,0 +1,6 @@
+mod.mc_compat = "1.21.5"
+mod.loader_min = "0.16.0"
+deps.iris = "U6evbjd0"            # 1.8.11
+deps.sodium = "fVbw1C7i"          # 0.6.12
+deps.fabric_api = "0.128.2+1.21.5"
+deps.glsl_transformer = "2.0.1"

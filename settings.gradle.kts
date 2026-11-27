@@ -22,6 +22,11 @@ stonecutter {
 
         minecraft("1.20.1", "fabric", "forge")
         minecraft("1.21.1", "fabric", "neoforge")
+        minecraft("1.21.3", "fabric", "neoforge")
+        minecraft("1.21.4", "fabric", "neoforge")
+        minecraft("1.21.5", "fabric", "neoforge")
+        minecraft("1.21.8", "fabric", "neoforge")
+        minecraft("1.21.10", "fabric", "neoforge")
         minecraft("1.21.11", "fabric", "neoforge")
         minecraft("26.1.2", "fabric", "neoforge")
         minecraft("26.2", "fabric", "neoforge")
