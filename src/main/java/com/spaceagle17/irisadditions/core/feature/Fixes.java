@@ -33,5 +33,11 @@ public final class Fixes {
             .includedSince(Mods.IRIS, "1.11.2");
             //?}
 
+    // 1.21.2-1.21.5 the button is draw late enough that it fades away
+    //? if >=1.21.2 <1.21.6 {
+    /*public static final Feature HIDE_GUI_BUTTON_FADE = GROUP.register("hideGUIButtonFadeFix",
+            "Stops the hide GUI button from fading away in the shader settings screen.", false);
+    *///?}
+
     private Fixes() {}
 }
