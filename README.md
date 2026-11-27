@@ -35,6 +35,8 @@ All bug fixes can be found in the [<ins>bug fix list</ins>](https://github.com/S
 ## For Shader Devs
 All shader defines can be found in the [<ins>define list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/DEFINES.md).
 
+All backported uniforms can be found in the [<ins>uniform list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/UNIFORMS.md).
+
 ## Links
 * **Support SpacEagle17 on [<ins>Patreon or Kofi</ins>](https://www.euphoriapatches.com/support/)**
 * **Contact:** **https://euphoriapatches.com/contact**
@@ -67,6 +69,7 @@ This is mostly so I can remember XD
 ### Layout
 - `core/` plain Java with most of the logic, no Minecraft, Iris or loader imports
 - `mixin/` hooks into Iris
+- `uniforms/` backported shader uniforms
 - `loader/` Fabric, Forge and NeoForge code
 - `versions/` dependencies of each build
 
@@ -85,6 +88,9 @@ newCall();
 1. Declare it in `Features.java` or `Fixes.java`, the existing entries show the options
 2. Put its mixins in `mixin/features/<id>/` or `mixin/fixes/<id>/` and list them in `iris_additions.mixins.json` (version specific ones in `VersionedMixins.java`)
 3. Document it in `FEATURES.md` or `FIXES.md`, and shader defines in `DEFINES.md`
+
+### Adding a uniform
+Add it to a class in `uniforms/`, register that in `ShaderUniforms.java` and document it in `UNIFORMS.md`. The define comes by itself
 
 ### Adding a Minecraft version
 Add it to `settings.gradle.kts` and `stonecutter.properties.toml`, copy a close folder in `versions/`, then run `./gradlew buildAll` to see what breaks

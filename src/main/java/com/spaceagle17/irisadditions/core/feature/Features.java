@@ -38,5 +38,9 @@ public final class Features {
             .includedSince(Mods.IRIS, "1.10.6");
     *///?}
 
+    // Which versions get a uniform is decided per uniform, see ShaderUniforms
+    public static final Feature UNIFORM_BACKPORTS = GROUP.register("uniformBackports",
+            "Adds shader uniforms of newer Iris versions. Changing this needs the shaders to be reloaded.", false);
+
     private Features() {}
 }

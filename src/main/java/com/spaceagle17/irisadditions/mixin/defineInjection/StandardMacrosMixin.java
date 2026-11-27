@@ -1,6 +1,7 @@
 package com.spaceagle17.irisadditions.mixin.defineInjection;
 
 import com.spaceagle17.irisadditions.core.defines.ShaderDefines;
+import com.spaceagle17.irisadditions.uniforms.ShaderUniforms;
 import net.irisshaders.iris.gl.shader.StandardMacros;
 import net.irisshaders.iris.helpers.StringPair;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,7 +33,8 @@ public abstract class StandardMacrosMixin {
         ShaderDefines.addDefines(
                 key -> define(list, key),
                 (key, value) -> define(list, key, value),
-                key -> list.stream().anyMatch(pair -> pair.key().equals(key))
+                key -> list.stream().anyMatch(pair -> pair.key().equals(key)),
+                ShaderUniforms.defines()
         );
         return list;
     }

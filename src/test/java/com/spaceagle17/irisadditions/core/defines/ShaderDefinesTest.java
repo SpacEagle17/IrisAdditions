@@ -20,7 +20,7 @@ class ShaderDefinesTest {
     private static List<String> addedDefines(String... irisDefines) {
         List<String> defines = new ArrayList<>();
         ShaderDefines.addDefines(defines::add, (key, value) -> defines.add(key + "=" + value),
-                List.of(irisDefines)::contains);
+                List.of(irisDefines)::contains, List.of());
         return defines;
     }
 
@@ -49,6 +49,17 @@ class ShaderDefinesTest {
         assertEquals(List.of("IS_IRIS_ADDITIONS", "IRIS_ADDITIONS_VERSION=10000", "DISTANT_HORIZONS_TEXTURES"),
                 addedDefines("DISTANT_HORIZONS"));
         assertEquals(MOD_DEFINES, addedDefines());
+    }
+
+    @Test
+    void addsTheUniformDefines() {
+        Mods.setPlatform(new FakePlatform("iris_additions").withMod(Mods.IRIS, "1.11.3+mc26.1"));
+        List<String> defines = new ArrayList<>();
+
+        ShaderDefines.addDefines(defines::add, (key, value) -> {}, define -> false,
+                List.of("IRIS_ADDITIONS_UNIFORM_HEAVY_FOG"));
+
+        assertEquals(List.of("IS_IRIS_ADDITIONS", "IRIS_ADDITIONS_UNIFORM_HEAVY_FOG"), defines);
     }
 
     // Euphoria Patcher adds its own define, so it must not be defined twice
