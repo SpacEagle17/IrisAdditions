@@ -70,6 +70,7 @@ This is mostly so I can remember XD
 - `core/` plain Java with most of the logic, no Minecraft, Iris or loader imports
 - `mixin/` hooks into Iris
 - `uniforms/` backported shader uniforms
+- `fixes/` fix stuff, yes obvious XD
 - `loader/` Fabric, Forge and NeoForge code
 - `versions/` dependencies of each build
 

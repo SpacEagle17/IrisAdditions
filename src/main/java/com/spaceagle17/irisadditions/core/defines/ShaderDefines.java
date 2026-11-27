@@ -32,6 +32,12 @@ public final class ShaderDefines {
 
     public static void addDefines(Consumer<String> defineKey, BiConsumer<String, String> defineKeyValue,
                                   Predicate<String> isDefinedByIris, List<String> uniformDefines) {
+        addDefines(defineKey, defineKeyValue, isDefinedByIris, uniformDefines, FeatureGroups.all());
+    }
+
+    // Tests pass their own features
+    static void addDefines(Consumer<String> defineKey, BiConsumer<String, String> defineKeyValue,
+                           Predicate<String> isDefinedByIris, List<String> uniformDefines, List<FeatureGroup> groups) {
         try {
             defineKey.accept("IS_IRIS_ADDITIONS");
             debugLog("Adding IS_IRIS_ADDITIONS define");
@@ -45,7 +51,7 @@ public final class ShaderDefines {
                 debugLog("Not adding IRIS_ADDITIONS_VERSION define - version unknown");
             }
 
-            for (FeatureGroup group : FeatureGroups.all()) {
+            for (FeatureGroup group : groups) {
                 for (Feature feature : group.all()) {
                     if (!feature.isEnabled()) continue;
                     if (!feature.requiredIrisDefine().map(isDefinedByIris::test).orElse(true)) continue;

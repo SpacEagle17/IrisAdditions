@@ -39,6 +39,16 @@ public final class Fixes {
             "Stops the hide GUI button from fading away in the shader settings screen.", false);
     *///?}
 
+    // https://github.com/IrisShaders/Iris/commit/c00471baff637f81e3eb0f5f028da19ab2cc3ef3
+    // Minecraft 1.21.9 draws the sun and moon right away again, like before 1.21.4
+    //? if >=1.21.4 <=1.21.8 {
+    /*public static final Feature SKY_RENDER_STAGE = GROUP.register("skyRenderStageFix",
+            "Fixes the sun and sunset renderstages being wrongly assigned to the moon one. Changing this needs the shaders to be reloaded.",
+            false)
+            .includedSince(Mods.IRIS, "1.9.2")
+            .shaderDefine("IRIS_ADDITIONS_SKY_RENDER_STAGE_FIX");
+    *///?}
+
     // https://github.com/IrisShaders/Iris/pull/2941
     // Only wrong since Minecraft 1.21.5, and every Iris release for 26.1 and newer has the fix
     //? if >=1.21.5 <=1.21.11 {

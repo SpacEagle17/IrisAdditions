@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class FeaturesTest {
+class FeatureConstraintsTest {
     // The groups are global
     private static final Feature SHARED = Features.GROUP.register("testShared", "Also in Euphoria Patcher", true);
     private static final Feature OWN = Features.GROUP.register("testOwn", "Only in this mod", false);

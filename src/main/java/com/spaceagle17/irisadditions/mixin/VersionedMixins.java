@@ -27,6 +27,10 @@ public final class VersionedMixins {
         /*mixins.add("fixes.hideGUIButtonFadeFix.ShaderPackOptionListMixin");
         *///?}
 
+        //? if >=1.21.4 <=1.21.8 {
+        /*mixins.add("fixes.skyRenderStageFix.SkyRendererMixin");
+        *///?}
+
         //? if >=1.21.5 <=1.21.11 {
         /*mixins.add("fixes.horizonPerformanceFix.HorizonRendererMixin");
         *///?}
