@@ -1,6 +1,7 @@
 import me.modmuss50.mpp.ModPublishExtension
 import me.modmuss50.mpp.PublishModTask
 import me.modmuss50.mpp.ReleaseType
+import me.modmuss50.mpp.platforms.modrinth.ModrinthEnvironment
 import org.gradle.api.Project
 import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Provider
@@ -54,6 +55,7 @@ internal fun Project.configurePublishing(node: ModNode, modVersion: String, modJ
             accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
             minecraftVersions.addAll(node.minecraftReleases)
             requires(modrinthShaderMod)
+            environment.set(ModrinthEnvironment.CLIENT_ONLY)
         }
     }
 
@@ -66,6 +68,9 @@ internal fun Project.configurePublishing(node: ModNode, modVersion: String, modJ
         onlyIf("platform was selected in confirmPublish") {
             !(toCurseforge && session.get().skipCurseforge) && !(toModrinth && session.get().skipModrinth)
         }
+        // test only for 1.20-1.21 range
+        // val inTestRange = node.minecraft in listOf("1.20.1", "1.21.1")
+        // onlyIf("version is part of the publish test") { inTestRange }
         if (live) doFirst { Thread.sleep(SECONDS_BETWEEN_UPLOADS * 1000) }
     }
 }
