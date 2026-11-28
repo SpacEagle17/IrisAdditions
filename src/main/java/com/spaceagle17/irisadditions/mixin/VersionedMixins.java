@@ -35,6 +35,10 @@ public final class VersionedMixins {
         /*mixins.add("fixes.horizonPerformanceFix.HorizonRendererMixin");
         *///?}
 
+        //? if >=1.21.9 <=26.2 {
+        /*mixins.add("features.clampedEndFlashAngle.EndFlashStateMixin");
+        *///?}
+
         //? if forge {
         /*mixins.add("uniforms.BiomeAmbientSoundsHandlerMixin");
         mixins.add("uniforms.GameRendererInvoker");

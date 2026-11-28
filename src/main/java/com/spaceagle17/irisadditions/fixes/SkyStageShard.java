@@ -8,7 +8,7 @@ import net.irisshaders.iris.pipeline.WorldRenderingPhase;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 
-// Adapted from Iris by IMS212 (LGPL-3.0), changed for IrisAdditions in 2026. See 3rd_party_licenses/Iris-LGPL-3.0.txt
+// Adapted from Iris by IMS (LGPL-3.0), changed for IrisAdditions in 2026. See 3rd_party_licenses/Iris-LGPL-3.0.txt
 // https://github.com/IrisShaders/Iris/commit/c00471baff637f81e3eb0f5f028da19ab2cc3ef3
 public final class SkyStageShard extends RenderStateShard {
     public static final SkyStageShard SUN = new SkyStageShard("irisadditions_sun", WorldRenderingPhase.SUN);

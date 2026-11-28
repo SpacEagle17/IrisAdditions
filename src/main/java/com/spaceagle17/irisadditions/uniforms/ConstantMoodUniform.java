@@ -15,7 +15,7 @@ import net.minecraft.world.level.biome.AmbientMoodSettings;
 
 import static net.irisshaders.iris.gl.uniform.UniformUpdateFrequency.PER_TICK;
 
-// Adapted from Iris by IMS212 (LGPL-3.0), changed for IrisAdditions in 2026. See 3rd_party_licenses/Iris-LGPL-3.0.txt
+// Adapted from Iris by IMS (LGPL-3.0), changed for IrisAdditions in 2026. See 3rd_party_licenses/Iris-LGPL-3.0.txt
 // https://github.com/IrisShaders/Iris/commit/e9c00310ab644cfc88928502807cbb77632140b3
 // Like playerMood, but it does not reset after 1.0
 public final class ConstantMoodUniform {

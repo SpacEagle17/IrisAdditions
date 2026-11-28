@@ -14,7 +14,7 @@ import org.joml.Vector3f;
 
 import static net.irisshaders.iris.gl.uniform.UniformUpdateFrequency.PER_FRAME;
 
-// Adapted from Iris by IMS212 (LGPL-3.0), changed for IrisAdditions in 2026. See 3rd_party_licenses/Iris-LGPL-3.0.txt
+// Adapted from Iris by IMS (LGPL-3.0), changed for IrisAdditions in 2026. See 3rd_party_licenses/Iris-LGPL-3.0.txt
 // https://github.com/IrisShaders/Iris/commit/bc4b8c4634f2aed4e08fce87cae16ab772257938
 final class SelectedBlockUniforms {
     private SelectedBlockUniforms() {}

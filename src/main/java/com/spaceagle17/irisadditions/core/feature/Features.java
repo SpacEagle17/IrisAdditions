@@ -38,6 +38,13 @@ public final class Features {
             .includedSince(Mods.IRIS, "1.10.6");
     *///?}
 
+    // https://github.com/IrisShaders/Iris/pull/3082
+    //? if >=1.21.9 <=26.2 {
+    /*public static final Feature CLAMPED_END_FLASH_ANGLE = GROUP.register("clampedEndFlashAngle",
+            "Keeps the End flash at least 5 degrees above the horizon with shaders, so its shadows stay stable.", false)
+            .includedSince(Mods.IRIS, "1.11.2");
+    *///?}
+
     // Which versions get a uniform is decided per uniform, see ShaderUniforms
     public static final Feature UNIFORM_BACKPORTS = GROUP.register("uniformBackports",
             "Adds shader uniforms of newer Iris versions. Changing this needs the shaders to be reloaded.", false);

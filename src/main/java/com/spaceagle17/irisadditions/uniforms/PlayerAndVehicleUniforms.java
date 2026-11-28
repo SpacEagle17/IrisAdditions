@@ -10,8 +10,8 @@ import net.irisshaders.iris.uniforms.CameraUniforms;
 import net.irisshaders.iris.uniforms.CapturedRenderingState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import org.joml.Vector3d;
 
 import static net.irisshaders.iris.gl.uniform.UniformUpdateFrequency.PER_FRAME;
@@ -63,7 +63,7 @@ final class PlayerAndVehicleUniforms {
         var entityIds = WorldRenderingSettings.INSTANCE.getEntityIds();
         if (vehicle == null || entityIds == null) return 0;
 
-        var type = BuiltInRegistries.ENTITY_TYPE.getKey(vehicle.getType());
+        var type = EntityType.getKey(vehicle.getType());
         return entityIds.applyAsInt(new NamespacedId(type.getNamespace(), type.getPath()));
     }
 
