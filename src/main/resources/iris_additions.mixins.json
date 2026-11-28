@@ -12,6 +12,7 @@
     "features.dropSettingsInSelectionScreen.ShaderPackScreenMixin",
     "fixes.atMidBlockHighCoordinatesFix.ExtendedDataHelperMixin",
     "fixes.hideGUIMenuJumpFix.ShaderPackScreenMixin",
+    "fixes.idMapEmptyEntryFix.IdMapMixin",
     "fixes.selectedPackCenteredFix.ShaderPackSelectionListMixin",
     "uniforms.CommonUniformsMixin"
   ],

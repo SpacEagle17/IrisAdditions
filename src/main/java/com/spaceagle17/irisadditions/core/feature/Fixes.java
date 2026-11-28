@@ -33,6 +33,12 @@ public final class Fixes {
             .includedSince(Mods.IRIS, "1.11.2");
             //?}
 
+    // https://github.com/IrisShaders/Iris/pull/3413
+    public static final Feature ID_MAP_EMPTY_ENTRY = GROUP.register("idMapEmptyEntryFix",
+            "Stops empty values in the properties files from counting as entries, which spams the log with duplicate warnings in debug mode. Changing this needs the shaders to be reloaded.",
+            false)
+            .includedSince(Mods.IRIS, "1.12.0");
+
     // 1.21.2-1.21.5 the button is draw late enough that it fades away
     //? if >=1.21.2 <1.21.6 {
     /*public static final Feature HIDE_GUI_BUTTON_FADE = GROUP.register("hideGUIButtonFadeFix",
