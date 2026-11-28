@@ -4,6 +4,7 @@ package com.spaceagle17.irisadditions.mixin.fixes.horizonPerformanceFix;
 /*import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.spaceagle17.irisadditions.core.feature.Fixes;
+import com.spaceagle17.irisadditions.core.log.Log;
 import net.irisshaders.iris.pathways.HorizonRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -26,6 +27,12 @@ public abstract class HorizonRendererMixin {
     @Inject(method = "rebuildBuffer", at = @At("HEAD"))
     private void irisAdditions$chooseShape(CallbackInfo ci) {
         irisAdditions$useFan = Fixes.HORIZON_PERFORMANCE.isEnabled();
+        irisAdditions$debugLog("Building the horizon, as a triangle fan: " + irisAdditions$useFan);
+    }
+
+    @Unique
+    private static void irisAdditions$debugLog(String message) {
+        Log.debug("[HorizonRendererMixin] " + message);
     }
 
     @ModifyArg(

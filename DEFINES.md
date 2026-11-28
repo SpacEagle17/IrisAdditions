@@ -7,4 +7,5 @@ Defines which IrisAdditions adds to shaders.
 | `IRIS_ADDITIONS_AT_MIDBLOCK_FIX`      | IrisAdditions applies the fix                                                                         | [at_midBlock at High Coordinates](FIXES.md#at-midblock-fix) |
 | `IRIS_ADDITIONS_SKY_RENDER_STAGE_FIX` | IrisAdditions applies the fix                                                                         | [Sun and Moon Render Stage](FIXES.md#sky-render-stage-fix)  |
 | `IRIS_ADDITIONS_UNIFORM_...`          | IrisAdditions adds that uniform, there is one define for each                                         | [Uniform list](UNIFORMS.md)                                 |
+| `MAX_COLOR_BUFFERS`                   | IrisAdditions raises the limit. The same define as in newer Iris, the value is `32`                   | [More Color Buffers](FEATURES.md#more-color-buffers)        |
 | `DISTANT_HORIZONS_TEXTURES`           | When DH is rendering and correct version is installed. The same define as in newer Iris               | [Distant Horizons Textures](FEATURES.md#dh-textures)        |

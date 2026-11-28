@@ -37,6 +37,8 @@ All shader defines can be found in the [<ins>define list</ins>](https://github.c
 
 All backported uniforms can be found in the [<ins>uniform list</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/UNIFORMS.md).
 
+With IrisAdditions installed (`IS_IRIS_ADDITIONS`, see [<ins>defines</ins>](https://github.com/SpacEagle17/IrisAdditions/blob/main/DEFINES.md)), older Iris versions also allow **32 colortex's** and **SSBOs up to 12**, like newer Iris.
+
 ## Links
 * **Support SpacEagle17 on [<ins>Patreon or Kofi</ins>](https://www.euphoriapatches.com/support/)**
 * **Contact:** **https://euphoriapatches.com/contact**

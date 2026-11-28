@@ -1,6 +1,7 @@
 package com.spaceagle17.irisadditions.mixin.fixes.hideGUIMenuJumpFix;
 
 import com.spaceagle17.irisadditions.core.feature.Fixes;
+import com.spaceagle17.irisadditions.core.log.Log;
 import net.irisshaders.iris.gui.NavigationController;
 import net.irisshaders.iris.gui.screen.ShaderPackScreen;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,8 +30,14 @@ public abstract class ShaderPackScreenMixin {
         // Null means that there is no pack anymore
         if (Fixes.HIDE_GUI_MENU_JUMP.isEnabled() && irisAdditions$previousNavigation != null && navigation != null) {
             navigation = irisAdditions$previousNavigation;
+            irisAdditions$debugLog("Kept the open settings menu");
         }
         irisAdditions$previousNavigation = null;
+    }
+
+    @Unique
+    private static void irisAdditions$debugLog(String message) {
+        Log.debug("[ShaderPackScreenMixin] " + message);
     }
 
     // Iris calls this only when switching packs, and another pack has other screens

@@ -31,7 +31,15 @@ class ShaderDefinesTest {
         Mods.setPlatform(new FakePlatform("iris_additions"));
 
         assertEquals(List.of("IS_IRIS_ADDITIONS", "IRIS_ADDITIONS_VERSION=10000",
-                "TEST_BACKPORT", "TEST_BACKPORT_ALIAS"), addedDefines());
+                "TEST_BACKPORT", "TEST_BACKPORT_ALIAS", "TEST_VALUE=32"), addedDefines());
+    }
+
+    @Test
+    void doesNotDefineAValueTwice() {
+        Mods.setPlatform(new FakePlatform("iris_additions"));
+
+        assertEquals(List.of("IS_IRIS_ADDITIONS", "IRIS_ADDITIONS_VERSION=10000",
+                "TEST_BACKPORT", "TEST_BACKPORT_ALIAS"), addedDefines("TEST_VALUE"));
     }
 
     @Test

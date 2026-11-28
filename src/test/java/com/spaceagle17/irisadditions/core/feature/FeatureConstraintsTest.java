@@ -117,6 +117,29 @@ class FeatureConstraintsTest {
     }
 
     @Test
+    void configChangesNeedingARestartAreIgnoredWhileRunning() {
+        Mods.setPlatform(new FakePlatform("iris"));
+        Feature restart = new Feature("testRestart", "Needs a restart", false).needsRestart();
+
+        restart.setEnabledInConfig(false);
+        restart.setEnabledInConfig(true);
+
+        assertFalse(restart.isEnabled());
+    }
+
+    @Test
+    void reportsEachChangeWhichNeedsARestartOnce() {
+        Feature restart = new Feature("testReport", "Needs a restart", false).needsRestart();
+
+        assertFalse(restart.setEnabledInConfig(true));
+        assertTrue(restart.setEnabledInConfig(false));
+        assertFalse(restart.setEnabledInConfig(false));
+        // Back to what the game runs with
+        assertFalse(restart.setEnabledInConfig(true));
+        assertTrue(restart.setEnabledInConfig(false));
+    }
+
+    @Test
     void mixinsOutsideAFeaturePackageAreAlwaysAllowed() {
         Mods.setPlatform(new FakePlatform("euphoria_patcher"));
 

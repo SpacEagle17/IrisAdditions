@@ -42,6 +42,8 @@ public final class IrisAdditions {
                     debugLog("'" + group.id() + "." + feature.id() + "' is already part of the installed Iris");
                 } else if (feature.isMissingRequirement()) {
                     debugLog("'" + group.id() + "." + feature.id() + "' needs a mod which is missing or too old");
+                } else if (!feature.isEnabled()) {
+                    debugLog("'" + group.id() + "." + feature.id() + "' is turned off in the config");
                 }
             }
         }

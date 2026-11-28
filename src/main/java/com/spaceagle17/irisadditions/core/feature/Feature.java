@@ -7,6 +7,7 @@ import com.spaceagle17.irisadditions.core.platform.Platform;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -22,9 +23,14 @@ public final class Feature {
     // Null if every Euphoria Patcher version has it
     private String euphoriaPatcherSince;
     private final List<String> shaderDefines = new ArrayList<>();
+    // Name to value, for defines which have one
+    private final Map<String, String> shaderValues = new LinkedHashMap<>();
     // Null if the shader defines do not depend on one of Iris
     private String requiredIrisDefine;
+    private boolean needsRestart;
+    private volatile boolean configRead;
     private volatile boolean enabledInConfig = true;
+    private volatile boolean latestInConfig;
     private volatile ModLookup modLookup;
 
     Feature(String id, String description, boolean alsoInEuphoriaPatcher) {
@@ -57,9 +63,20 @@ public final class Feature {
         return this;
     }
 
+    Feature shaderDefine(String name, String value) {
+        shaderValues.put(name, value);
+        return this;
+    }
+
     // The shader defines are only added when Iris adds this one
     Feature definesOnlyWith(String irisDefine) {
         requiredIrisDefine = irisDefine;
+        return this;
+    }
+
+    // For changes which cannot be undone while the game runs, the config is only read once
+    Feature needsRestart() {
+        needsRestart = true;
         return this;
     }
 
@@ -81,6 +98,10 @@ public final class Feature {
 
     public List<String> shaderDefines() {
         return Collections.unmodifiableList(shaderDefines);
+    }
+
+    public Map<String, String> shaderValues() {
+        return Collections.unmodifiableMap(shaderValues);
     }
 
     public Optional<String> requiredIrisDefine() {
@@ -116,8 +137,17 @@ public final class Feature {
         return enabledInConfig && !isSuppressed();
     }
 
-    public void setEnabledInConfig(boolean enabled) {
+    // True if this is a new change which only applies after a restart
+    public boolean setEnabledInConfig(boolean enabled) {
+        if (needsRestart && configRead) {
+            boolean changed = enabled != latestInConfig;
+            latestInConfig = enabled;
+            return changed && enabled != enabledInConfig;
+        }
+        configRead = true;
+        latestInConfig = enabled;
         this.enabledInConfig = enabled;
+        return false;
     }
 
     private record ModLookup(Platform platform, boolean suppressed) {}

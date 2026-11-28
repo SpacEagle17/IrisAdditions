@@ -45,6 +45,23 @@ public final class Features {
             .includedSince(Mods.IRIS, "1.11.2");
     *///?}
 
+    // Every Iris release for 26.1 and newer has both limits
+    //? if <=1.21.11 {
+    /*// https://github.com/IrisShaders/Iris/commit/b7c084d24c542a1f2c9982ed75fd6225ef471af3
+    public static final Feature MORE_COLOR_BUFFERS = GROUP.register("moreColorBuffers",
+            "Lets shaders use 32 colortex's instead of 16. Changing this needs the game to be restarted.", false)
+            .includedSince(Mods.IRIS, "1.10.5")
+            .needsRestart()
+            // The define of newer Iris, so shaders which check it just work
+            .shaderDefine("MAX_COLOR_BUFFERS", "32");
+
+    // https://github.com/IrisShaders/Iris/commit/aaafb02916b7bf27276c10d76d739e3ee473a6b2
+    public static final Feature MORE_STORAGE_BUFFERS = GROUP.register("moreStorageBuffers",
+            "Lets shaders use 12 SSBOs instead of 8. Changing this needs the shaders to be reloaded.",
+            false)
+            .includedSince(Mods.IRIS, "1.10.5");
+    *///?}
+
     // Which versions get a uniform is decided per uniform, see ShaderUniforms
     public static final Feature UNIFORM_BACKPORTS = GROUP.register("uniformBackports",
             "Adds shader uniforms of newer Iris versions. Changing this needs the shaders to be reloaded.", false);

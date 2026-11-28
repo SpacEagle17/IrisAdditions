@@ -56,6 +56,12 @@ public final class ShaderDefines {
                     if (!feature.isEnabled()) continue;
                     if (!feature.requiredIrisDefine().map(isDefinedByIris::test).orElse(true)) continue;
                     add(defineKey, feature.shaderDefines());
+                    feature.shaderValues().forEach((name, value) -> {
+                        // Iris or another mod may define it already
+                        if (isDefinedByIris.test(name)) return;
+                        defineKeyValue.accept(name, value);
+                        debugLog("Adding " + name + " = " + value + " define");
+                    });
                 }
             }
             add(defineKey, uniformDefines);

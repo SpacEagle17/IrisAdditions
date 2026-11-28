@@ -17,7 +17,9 @@ public final class VersionedMixins {
         *///?}
 
         //? if <=1.21.11 {
-        /*mixins.add("features.shorterHoverTime.ShaderPackScreenMixin");
+        /*mixins.add("features.moreColorBuffers.PackRenderTargetDirectivesMixin");
+        mixins.add("features.moreStorageBuffers.ShaderPropertiesMixin");
+        mixins.add("features.shorterHoverTime.ShaderPackScreenMixin");
         mixins.add("uniforms.IrisMixin");
         mixins.add("uniforms.PBRTextureManagerMixin");
         mixins.add("uniforms.TextureStateAccessor");

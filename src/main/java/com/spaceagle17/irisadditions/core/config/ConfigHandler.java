@@ -28,8 +28,11 @@ public final class ConfigHandler {
 
         for (FeatureGroup group : FeatureGroups.all()) {
             for (Feature feature : group.all()) {
-                feature.setEnabledInConfig(Config.readWriteConfig(group.id(), feature.id(), true,
+                boolean needsRestart = feature.setEnabledInConfig(Config.readWriteConfig(group.id(), feature.id(), true,
                         feature.description() + "\nDefault = true"));
+                if (needsRestart && !feature.isSuppressed()) {
+                    Log.info("'" + group.id() + "." + feature.id() + "' was changed, restart the game to apply it");
+                }
             }
         }
 
